@@ -1,0 +1,1 @@
+const QUIZ_MAP={"Dospělý (16–59)|Muž|1–2× měsíčně|Začátečník|Kontrolu":{"name":"Babolat Counter Origin 2025","utm":"https://www.zijpadel.cz/babolat-counter-origin-2025/?utm_source=quiz&utm_medium=wizard&utm_campaign=recommendation","url":"https://www.zijpadel.cz/babolat-counter-origin-2025/"}};
