@@ -1,16 +1,16 @@
-
-<!doctype html><html lang="cs"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Žij padel – Racket Finder</title>
-<link rel="icon" href="favicon.ico">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-</head><body>
+<script src="quiz-map.js"></script>
+</head>
+<body>
 <div id="zp-quiz" class="zp-quiz">
-  <div class="zp-progress" id="zp-progress">Krok 1 z 5</div>
-  <form id="zp-quiz-form" class="zp-quiz__form" autocomplete="off">
-    <section class="zp-step active" data-step="1" data-name="Věk">
+  <form id="zp-quiz-form">
+    <section class="zp-step active">
       <h3>Věk?</h3>
       <div class="zp-options">
         <label><input type="radio" name="vek" value="Dospělý (16–59)"> Dospělý (16–59)</label>
@@ -20,48 +20,65 @@
       </div>
       <div class="zp-nav"><button type="button" class="zp-btn next">Další</button></div>
     </section>
-    <section class="zp-step" data-step="2" data-name="Pohlaví">
+
+    <section class="zp-step">
       <h3>Pohlaví?</h3>
       <div class="zp-options">
         <label><input type="radio" name="pohlavi" value="Muž"> Muž</label>
         <label><input type="radio" name="pohlavi" value="Žena"> Žena</label>
       </div>
-      <div class="zp-nav"><button type="button" class="zp-btn back">Zpět</button><button type="button" class="zp-btn next">Další</button></div>
+      <div class="zp-nav">
+        <button type="button" class="zp-btn back">Zpět</button>
+        <button type="button" class="zp-btn next">Další</button>
+      </div>
     </section>
-    <section class="zp-step" data-step="3" data-name="Frekvence">
+
+    <section class="zp-step">
       <h3>Jak často hraješ?</h3>
       <div class="zp-options">
         <label><input type="radio" name="frekvence" value="1–2× měsíčně"> 1–2× měsíčně</label>
         <label><input type="radio" name="frekvence" value="1–2× týdně"> 1–2× týdně</label>
         <label><input type="radio" name="frekvence" value="3+ týdně"> 3+ týdně</label>
       </div>
-      <div class="zp-nav"><button type="button" class="zp-btn back">Zpět</button><button type="button" class="zp-btn next">Další</button></div>
+      <div class="zp-nav">
+        <button type="button" class="zp-btn back">Zpět</button>
+        <button type="button" class="zp-btn next">Další</button>
+      </div>
     </section>
-    <section class="zp-step" data-step="4" data-name="Úroveň">
+
+    <section class="zp-step">
       <h3>Úroveň?</h3>
       <div class="zp-options">
         <label><input type="radio" name="uroven" value="Začátečník"> Začátečník</label>
         <label><input type="radio" name="uroven" value="Pokročilý"> Pokročilý</label>
-        <label><input type="radio" name="uroven" value="Velmi zdatný hráč / expert"> Velmi zdatný hráč / expert</label>
+        <label><input type="radio" name="uroven" value="Pokročilý až expert"> Pokročilý až expert</label>
       </div>
-      <div class="zp-nav"><button type="button" class="zp-btn back">Zpět</button><button type="button" class="zp-btn next">Další</button></div>
+      <div class="zp-nav">
+        <button type="button" class="zp-btn back">Zpět</button>
+        <button type="button" class="zp-btn next">Další</button>
+      </div>
     </section>
-    <section class="zp-step" data-step="5" data-name="Styl">
+
+    <section class="zp-step">
       <h3>Co nejvíc potřebuješ?</h3>
       <div class="zp-options">
         <label><input type="radio" name="styl" value="Kontrolu"> Kontrolu</label>
         <label><input type="radio" name="styl" value="Univerzálnost"> Univerzálnost</label>
         <label><input type="radio" name="styl" value="Sílu"> Sílu</label>
       </div>
-      <div class="zp-nav"><button type="button" class="zp-btn back">Zpět</button><button type="button" class="zp-btn submit">Zobrazit doporučení</button></div>
+      <div class="zp-nav">
+        <button type="button" class="zp-btn back">Zpět</button>
+        <button type="button" class="zp-btn submit">Zobrazit doporučení</button>
+      </div>
     </section>
   </form>
+
   <section id="zp-result" class="zp-result" hidden>
     <div class="zp-card">
       <div class="zp-card__text">
         <div class="zp-product-name" id="zp-product-name"></div>
-        <p class="zp-note">Doporučení je na základě tvých odpovědí. Pokud si nejsi jistý/á, napiš nám – poradíme.</p>
-        <a id="zp-product-link" class="zp-cta" href="#" target="_blank" rel="nofollow noopener">Zobrazit raketu</a>
+        <p class="zp-reason" id="zp-product-reason"></p>
+        <a id="zp-product-link" class="zp-cta" href="#" target="_blank">Zobrazit raketu</a>
       </div>
       <div class="zp-card__img" id="zp-product-image-wrap" hidden>
         <img id="zp-product-image" alt="Doporučená padelová raketa">
@@ -70,22 +87,24 @@
     <div class="zp-nav"><button type="button" class="zp-btn again" id="zp-again">Vyplnit znovu</button></div>
   </section>
 </div>
-<script src="quiz-map.js"></script>
+
 <script>
-document.addEventListener('DOMContentLoaded',function(){
+document.addEventListener('DOMContentLoaded',()=>{
   const form=document.getElementById('zp-quiz-form');
   const steps=[...form.querySelectorAll('.zp-step')];
-  const progress=document.getElementById('zp-progress');
   const result=document.getElementById('zp-result');
   const againBtn=document.getElementById('zp-again');
   const productNameEl=document.getElementById('zp-product-name');
+  const productReasonEl=document.getElementById('zp-product-reason');
   const productLinkEl=document.getElementById('zp-product-link');
   const productImageWrap=document.getElementById('zp-product-image-wrap');
   const productImageEl=document.getElementById('zp-product-image');
   let current=0,total=steps.length;
-  function showStep(i){steps.forEach((s,idx)=>s.classList.toggle('active',idx===i)); if(progress) progress.textContent=`Krok ${i+1} z ${total}`;}
-  function val(n){const c=form.querySelector(`input[name="${n}"]:checked`);return c?c.value:null}
-  function valid(i){return [...steps[i].querySelectorAll('input[type="radio"]')].some(x=>x.checked)}
+
+  function showStep(i){ steps.forEach((s,idx)=>s.classList.toggle('active',idx===i)); window.scrollTo({top:0,behavior:'smooth'}); }
+  function val(n){const c=form.querySelector(`input[name="${n}"]:checked`);return c?c.value:null;}
+  function valid(i){return [...steps[i].querySelectorAll('input[type="radio"]')].some(x=>x.checked);}
+  
   form.addEventListener('click',e=>{
     const next=e.target.closest('.next'),back=e.target.closest('.back'),submit=e.target.closest('.submit');
     if(next){ if(!valid(current))return; current=Math.min(current+1,total-1); showStep(current); }
@@ -94,13 +113,26 @@ document.addEventListener('DOMContentLoaded',function(){
       const key=[val('vek'),val('pohlavi'),val('frekvence'),val('uroven'),val('styl')].join('|');
       const rec=(typeof QUIZ_MAP!=='undefined')?QUIZ_MAP[key]:null;
       form.style.display='none'; result.hidden=false;
-      if(rec){ productNameEl.textContent=rec.name||'Doporučený model'; productLinkEl.href=(rec.utm&&rec.utm.trim())?rec.utm:(rec.url||'#'); if(rec.image){productImageEl.src=rec.image;productImageWrap.hidden=false;}else{productImageWrap.hidden=true;} }
-      else { productNameEl.textContent='Pro tuto kombinaci zatím nemáme přiřazený produkt.'; productLinkEl.href='#'; productImageWrap.hidden=true; }
-      window.scrollTo({top:result.getBoundingClientRect().top+window.scrollY-12,behavior:'smooth'});
+      if(rec){
+        productNameEl.textContent=rec.name;
+        productReasonEl.textContent=rec.reason||'Tato raketa skvěle odpovídá tvému stylu hry.';
+        productLinkEl.href=rec.utm||rec.url||'#';
+        if(rec.image){productImageEl.src=rec.image;productImageWrap.hidden=false;}
+      } else {
+        productNameEl.textContent='Pro tuto kombinaci zatím nemáme přiřazený produkt.';
+        productLinkEl.href='#'; productImageWrap.hidden=true;
+      }
     }
   });
-  if(againBtn){ againBtn.addEventListener('click',()=>{form.reset(); current=0; showStep(current); form.style.display=''; result.hidden=true;}); }
+
+  if(againBtn){
+    againBtn.addEventListener('click',()=>{
+      form.reset(); current=0; form.style.display=''; result.hidden=true; showStep(current);
+    });
+  }
+
   showStep(current);
 });
 </script>
-</body></html>
+</body>
+</html>
