@@ -96,65 +96,71 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded',()=>{
-  const form=document.getElementById('zp-quiz-form');
-  const steps=[...form.querySelectorAll('.zp-step')];
-  const result=document.getElementById('zp-result');
-  const again=document.getElementById('zp-again');
-  const nameEl=document.getElementById('zp-product-name');
-  const reasonEl=document.getElementById('zp-product-reason');
-  const linkEl=document.getElementById('zp-product-link');
-  const imgEl=document.getElementById('zp-product-image');
-  let current=0;
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('zp-quiz-form');
+    const result = document.getElementById('zp-result');
+    const steps = [...form.querySelectorAll('.zp-step')];
+    const nameEl = result.querySelector('.zp-name');
+    const reasonEl = result.querySelector('.zp-reason');
+    const linkEl = result.querySelector('.zp-link');
+    const imgEl = result.querySelector('.zp-image');
+    let current = 0;
 
-  const showStep=i=>{
-    steps.forEach((s,idx)=>s.classList.toggle('active',idx===i));
-    window.scrollTo({top:0,behavior:'smooth'});
-  };
-  const val=n=>form.querySelector(`input[name="${n}"]:checked`)?.value;
-  const valid=i=>[...steps[i].querySelectorAll('input[type="radio"]')].some(x=>x.checked);
+    const showStep = i => {
+      steps.forEach((step, index) => {
+        step.classList.toggle('active', index === i);
+      });
+    };
 
-  form.addEventListener('click',e=>{
-    if(e.target.matches('.next')){ if(!valid(current))return; current++; showStep(current); }
-    if(e.target.matches('.back')){ current--; showStep(current); }
-    if(e.target.matches('.submit')){
-      if(!valid(current))return;
-      const key=[val('vek'),val('pohlavi'),val('frekvence'),val('uroven'),val('styl')]
-        .map(v=>v?.trim())
-        .join('|');
-      const rec=QUIZ_MAP[key];
-      form.style.display='none';
-      result.hidden=false;
+    const val = name => {
+      const input = form.querySelector(`input[name="${name}"]:checked`);
+      return input ? input.value : null;
+    };
 
-      if(rec){
-        nameEl.textContent=rec.name || 'Doporučená raketa';
-        reasonEl.textContent=rec.reason || 'Tato raketa ti nejlépe sedne podle tvého herního stylu.';
-        linkEl.href=(rec.utm && rec.utm.startsWith('http'))
-          ? rec.utm
-          : (rec.url && rec.url.startsWith('http'))
-          ? rec.url
-          : '#';
-        if(rec.image && rec.image.startsWith('http')){
-          imgEl.src=rec.image.replace(/^"+|"+$/g,'');
-          imgEl.style.display='block';
-        } else {
-          imgEl.style.display='none';
-        }
-      } else {
-        nameEl.textContent='Zatím nemáme přiřazenou raketu.';
-        reasonEl.textContent='Zkus prosím jinou kombinaci.';
-        linkEl.href='#';
-        imgEl.style.display='none';
+    const valid = i => !!steps[i] && [...steps[i].querySelectorAll('input[type="radio"]')].some(x => x.checked);
+
+    form.addEventListener('click', e => {
+      if (e.target.matches('.next')) {
+        if (!valid(current)) return;
+        current++;
+        showStep(current);
       }
-    }
-  });
+      if (e.target.matches('.back')) {
+        current--;
+        showStep(current);
+      }
+      if (e.target.matches('.submit')) {
+        if (!valid(current)) return;
+        const key = [val('vek'), val('pohlavi'), val('frekvence'), val('uroven'), val('styl')]
+          .map(v => v?.trim())
+          .join('|');
+        const rec = QUIZ_MAP[key];
+        form.style.display = 'none';
+        result.hidden = false;
 
-  again.addEventListener('click',()=>{
-    form.reset(); form.style.display=''; result.hidden=true; current=0; showStep(current);
+        if (rec) {
+          nameEl.textContent = rec.name || 'Doporučená raketa';
+          reasonEl.textContent = rec.reason || 'Tato raketa ti nejlépe sedne podle tvého herního stylu.';
+          linkEl.href = (rec.utm && rec.utm.startsWith('http')) ?
+            rec.utm :
+            (rec.url && rec.url.startsWith('http')) ?
+            rec.url :
+            '#';
+          if (rec.image && rec.image.startsWith('http')) {
+            imgEl.src = rec.image.replace(/^\"+|\"+$/g, '');
+            imgEl.style.display = 'block';
+          } else {
+            imgEl.style.display = 'none';
+          }
+        } else {
+          nameEl.textContent = 'Zatím nemáme přiřazenou raketu.';
+          reasonEl.textContent = 'Zkus prosím jinou kombinaci odpovědí.';
+          linkEl.style.display = 'none';
+          imgEl.style.display = 'none';
+        }
+      }
+    });
   });
-
-  showStep(current);
-});
 </script>
 </body>
 </html>
