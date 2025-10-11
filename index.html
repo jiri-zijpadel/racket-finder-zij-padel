@@ -119,16 +119,27 @@ document.addEventListener('DOMContentLoaded',()=>{
     if(e.target.matches('.back')){ current--; showStep(current); }
     if(e.target.matches('.submit')){
       if(!valid(current))return;
-      const key=[val('vek'),val('pohlavi'),val('frekvence'),val('uroven'),val('styl')].join('|');
+      const key=[val('vek'),val('pohlavi'),val('frekvence'),val('uroven'),val('styl')]
+        .map(v=>v?.trim())
+        .join('|');
       const rec=QUIZ_MAP[key];
       form.style.display='none';
       result.hidden=false;
+
       if(rec){
-        nameEl.textContent=rec.name;
+        nameEl.textContent=rec.name || 'Doporučená raketa';
         reasonEl.textContent=rec.reason || 'Tato raketa ti nejlépe sedne podle tvého herního stylu.';
-        linkEl.href=rec.utm || rec.url || '#';
-        if(rec.image){imgEl.src=rec.image;imgEl.style.display='block';}
-        else imgEl.style.display='none';
+        linkEl.href=(rec.utm && rec.utm.startsWith('http'))
+          ? rec.utm
+          : (rec.url && rec.url.startsWith('http'))
+          ? rec.url
+          : '#';
+        if(rec.image && rec.image.startsWith('http')){
+          imgEl.src=rec.image.replace(/^"+|"+$/g,'');
+          imgEl.style.display='block';
+        } else {
+          imgEl.style.display='none';
+        }
       } else {
         nameEl.textContent='Zatím nemáme přiřazenou raketu.';
         reasonEl.textContent='Zkus prosím jinou kombinaci.';
