@@ -1,1 +1,603 @@
-
+{
+  "childProduct": {
+    "name": "Babolat Alioth Junior",
+    "url": "https://www.zijpadel.cz/babolat-alioth-junior/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+    "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/1142-3_zijpadel-babolat-alioth-jr-2026-hlavni-jpeg.jpg?68ea322b"
+  },
+  "rules": [
+    {
+      "age": "Dospělý (16–59)",
+      "sex": "Muž",
+      "level": "Pokročilý",
+      "preference": "Kontrolu",
+      "product": {
+        "name": "Babolat Counter Veron 2025",
+        "url": "https://www.zijpadel.cz/babolat-counter-veron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/824-4_babolat-counter-veron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c70725"
+      }
+    },
+    {
+      "age": "Dospělý (16–59)",
+      "sex": "Muž",
+      "level": "Pokročilý",
+      "preference": "Sílu",
+      "product": {
+        "name": "Babolat Technical Veron Juan Lebron 2025",
+        "url": "https://www.zijpadel.cz/babolat-technical-veron-juan-lebron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/839-5_babolat-technical-veron-juan-lebron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68cbd789"
+      }
+    },
+    {
+      "age": "Dospělý (16–59)",
+      "sex": "Muž",
+      "level": "Pokročilý",
+      "preference": "Univerzálnost",
+      "product": {
+        "name": "Babolat Air Veron 2025",
+        "url": "https://www.zijpadel.cz/babolat-air-veron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/812-4_babolat-air-veron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c6fdd4"
+      }
+    },
+    {
+      "age": "Dospělý (16–59)",
+      "sex": "Muž",
+      "level": "Velmi zdatný hráč / expert",
+      "preference": "Kontrolu",
+      "product": {
+        "name": "Babolat Counter Viper 2025",
+        "url": "https://www.zijpadel.cz/babolat-counter-viper-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/830-4_babolat-counter-viper-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c70a24"
+      }
+    },
+    {
+      "age": "Dospělý (16–59)",
+      "sex": "Muž",
+      "level": "Velmi zdatný hráč / expert",
+      "preference": "Sílu",
+      "product": {
+        "name": "Babolat Technical Viper Juan Lebron 2025",
+        "url": "https://www.zijpadel.cz/babolat-technical-viper-juan-lebron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/1070-3_babolat-technical-viper-juan-lebron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68cbd789"
+      }
+    },
+    {
+      "age": "Dospělý (16–59)",
+      "sex": "Muž",
+      "level": "Velmi zdatný hráč / expert",
+      "preference": "Univerzálnost",
+      "product": {
+        "name": "Babolat Air Viper 2025",
+        "url": "https://www.zijpadel.cz/babolat-air-viper-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/818-4_babolat-air-viper-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c701b6"
+      }
+    },
+    {
+      "age": "Dospělý (16–59)",
+      "sex": "Muž",
+      "level": "Začátečník",
+      "preference": "Kontrolu",
+      "product": {
+        "name": "Babolat Counter Vertuo 2025",
+        "url": "https://www.zijpadel.cz/babolat-counter-vertuo-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/827-4_babolat-counter-vertuo-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c708b3"
+      }
+    },
+    {
+      "age": "Dospělý (16–59)",
+      "sex": "Muž",
+      "level": "Začátečník",
+      "preference": "Sílu",
+      "product": {
+        "name": "Babolat Technical Vertuo Juan Lebron 2025",
+        "url": "https://www.zijpadel.cz/babolat-technical-vertuo-juan-lebron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/845-5_babolat-technical-vertuo-juan-lebron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68cbd789"
+      }
+    },
+    {
+      "age": "Dospělý (16–59)",
+      "sex": "Muž",
+      "level": "Začátečník",
+      "preference": "Univerzálnost",
+      "product": {
+        "name": "Babolat Air Vertuo 2025",
+        "url": "https://www.zijpadel.cz/babolat-air-vertuo-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/815-4_babolat-air-vertuo-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c70039"
+      }
+    },
+    {
+      "age": "Dospělý (16–59)",
+      "sex": "Žena",
+      "level": "Pokročilý",
+      "preference": "Kontrolu",
+      "product": {
+        "name": "Babolat Counter Veron 2025",
+        "url": "https://www.zijpadel.cz/babolat-counter-veron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/824-4_babolat-counter-veron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c70725"
+      }
+    },
+    {
+      "age": "Dospělý (16–59)",
+      "sex": "Žena",
+      "level": "Pokročilý",
+      "preference": "Sílu",
+      "product": {
+        "name": "Babolat Technical Veron Juan Lebron 2025",
+        "url": "https://www.zijpadel.cz/babolat-technical-veron-juan-lebron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/839-5_babolat-technical-veron-juan-lebron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68cbd789"
+      }
+    },
+    {
+      "age": "Dospělý (16–59)",
+      "sex": "Žena",
+      "level": "Pokročilý",
+      "preference": "Univerzálnost",
+      "product": {
+        "name": "Babolat Air Veron 2025",
+        "url": "https://www.zijpadel.cz/babolat-air-veron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/812-4_babolat-air-veron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c6fdd4"
+      }
+    },
+    {
+      "age": "Dospělý (16–59)",
+      "sex": "Žena",
+      "level": "Velmi zdatný hráč / expert",
+      "preference": "Kontrolu",
+      "product": {
+        "name": "Babolat Counter Viper 2025",
+        "url": "https://www.zijpadel.cz/babolat-counter-viper-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/830-4_babolat-counter-viper-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c70a24"
+      }
+    },
+    {
+      "age": "Dospělý (16–59)",
+      "sex": "Žena",
+      "level": "Velmi zdatný hráč / expert",
+      "preference": "Sílu",
+      "product": {
+        "name": "Babolat Technical Viper Juan Lebron 2025",
+        "url": "https://www.zijpadel.cz/babolat-technical-viper-juan-lebron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/1070-3_babolat-technical-viper-juan-lebron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68cbd789"
+      }
+    },
+    {
+      "age": "Dospělý (16–59)",
+      "sex": "Žena",
+      "level": "Velmi zdatný hráč / expert",
+      "preference": "Univerzálnost",
+      "product": {
+        "name": "Babolat Air Viper 2025",
+        "url": "https://www.zijpadel.cz/babolat-air-viper-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/818-4_babolat-air-viper-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c701b6"
+      }
+    },
+    {
+      "age": "Dospělý (16–59)",
+      "sex": "Žena",
+      "level": "Začátečník",
+      "preference": "Kontrolu",
+      "product": {
+        "name": "Babolat Counter Vertuo 2025",
+        "url": "https://www.zijpadel.cz/babolat-counter-vertuo-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/827-4_babolat-counter-vertuo-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c708b3"
+      }
+    },
+    {
+      "age": "Dospělý (16–59)",
+      "sex": "Žena",
+      "level": "Začátečník",
+      "preference": "Sílu",
+      "product": {
+        "name": "Babolat Technical Vertuo Juan Lebron 2025",
+        "url": "https://www.zijpadel.cz/babolat-technical-vertuo-juan-lebron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/845-5_babolat-technical-vertuo-juan-lebron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68cbd789"
+      }
+    },
+    {
+      "age": "Dospělý (16–59)",
+      "sex": "Žena",
+      "level": "Začátečník",
+      "preference": "Univerzálnost",
+      "product": {
+        "name": "Babolat Air Vertuo 2025",
+        "url": "https://www.zijpadel.cz/babolat-air-vertuo-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/815-4_babolat-air-vertuo-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c70039"
+      }
+    },
+    {
+      "age": "Junior (10–15)",
+      "sex": "Muž",
+      "level": "Pokročilý",
+      "preference": "Kontrolu",
+      "product": {
+        "name": "Babolat Counter Vertuo 2025",
+        "url": "https://www.zijpadel.cz/babolat-counter-vertuo-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/827-4_babolat-counter-vertuo-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c708b3"
+      }
+    },
+    {
+      "age": "Junior (10–15)",
+      "sex": "Muž",
+      "level": "Pokročilý",
+      "preference": "Sílu",
+      "product": {
+        "name": "Babolat Technical Vertuo Juan Lebron 2025",
+        "url": "https://www.zijpadel.cz/babolat-technical-vertuo-juan-lebron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/845-5_babolat-technical-vertuo-juan-lebron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68cbd789"
+      }
+    },
+    {
+      "age": "Junior (10–15)",
+      "sex": "Muž",
+      "level": "Pokročilý",
+      "preference": "Univerzálnost",
+      "product": {
+        "name": "Babolat Air Vertuo 2025",
+        "url": "https://www.zijpadel.cz/babolat-air-vertuo-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/815-4_babolat-air-vertuo-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c70039"
+      }
+    },
+    {
+      "age": "Junior (10–15)",
+      "sex": "Muž",
+      "level": "Velmi zdatný hráč / expert",
+      "preference": "Kontrolu",
+      "product": {
+        "name": "Babolat Counter Vertuo 2025",
+        "url": "https://www.zijpadel.cz/babolat-counter-vertuo-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/827-4_babolat-counter-vertuo-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c708b3"
+      }
+    },
+    {
+      "age": "Junior (10–15)",
+      "sex": "Muž",
+      "level": "Velmi zdatný hráč / expert",
+      "preference": "Sílu",
+      "product": {
+        "name": "Babolat Technical Vertuo Juan Lebron 2025",
+        "url": "https://www.zijpadel.cz/babolat-technical-vertuo-juan-lebron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/845-5_babolat-technical-vertuo-juan-lebron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68cbd789"
+      }
+    },
+    {
+      "age": "Junior (10–15)",
+      "sex": "Muž",
+      "level": "Velmi zdatný hráč / expert",
+      "preference": "Univerzálnost",
+      "product": {
+        "name": "Babolat Air Vertuo 2025",
+        "url": "https://www.zijpadel.cz/babolat-air-vertuo-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/815-4_babolat-air-vertuo-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c70039"
+      }
+    },
+    {
+      "age": "Junior (10–15)",
+      "sex": "Muž",
+      "level": "Začátečník",
+      "preference": "Kontrolu",
+      "product": {
+        "name": "Babolat Counter Origin 2025",
+        "url": "https://www.zijpadel.cz/babolat-counter-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/821-4_babolat-counter-origin-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c705d5"
+      }
+    },
+    {
+      "age": "Junior (10–15)",
+      "sex": "Muž",
+      "level": "Začátečník",
+      "preference": "Sílu",
+      "product": {
+        "name": "Babolat Air Origin 2025",
+        "url": "https://www.zijpadel.cz/babolat-air-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/1067-4_zijpadel-babolat-air-origin-raketa-detail-predni.jpg?68c6b1e8"
+      }
+    },
+    {
+      "age": "Junior (10–15)",
+      "sex": "Muž",
+      "level": "Začátečník",
+      "preference": "Univerzálnost",
+      "product": {
+        "name": "Babolat Air Origin 2025",
+        "url": "https://www.zijpadel.cz/babolat-air-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/1067-4_zijpadel-babolat-air-origin-raketa-detail-predni.jpg?68c6b1e8"
+      }
+    },
+    {
+      "age": "Junior (10–15)",
+      "sex": "Žena",
+      "level": "Pokročilý",
+      "preference": "Kontrolu",
+      "product": {
+        "name": "Babolat Counter Origin 2025",
+        "url": "https://www.zijpadel.cz/babolat-counter-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/821-4_babolat-counter-origin-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c705d5"
+      }
+    },
+    {
+      "age": "Junior (10–15)",
+      "sex": "Žena",
+      "level": "Pokročilý",
+      "preference": "Sílu",
+      "product": {
+        "name": "Babolat Air Origin 2025",
+        "url": "https://www.zijpadel.cz/babolat-air-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/1067-4_zijpadel-babolat-air-origin-raketa-detail-predni.jpg?68c6b1e8"
+      }
+    },
+    {
+      "age": "Junior (10–15)",
+      "sex": "Žena",
+      "level": "Pokročilý",
+      "preference": "Univerzálnost",
+      "product": {
+        "name": "Babolat Air Origin 2025",
+        "url": "https://www.zijpadel.cz/babolat-air-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/1067-4_zijpadel-babolat-air-origin-raketa-detail-predni.jpg?68c6b1e8"
+      }
+    },
+    {
+      "age": "Junior (10–15)",
+      "sex": "Žena",
+      "level": "Velmi zdatný hráč / expert",
+      "preference": "Kontrolu",
+      "product": {
+        "name": "Babolat Counter Vertuo 2025",
+        "url": "https://www.zijpadel.cz/babolat-counter-vertuo-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/827-4_babolat-counter-vertuo-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c708b3"
+      }
+    },
+    {
+      "age": "Junior (10–15)",
+      "sex": "Žena",
+      "level": "Velmi zdatný hráč / expert",
+      "preference": "Sílu",
+      "product": {
+        "name": "Babolat Technical Vertuo Juan Lebron 2025",
+        "url": "https://www.zijpadel.cz/babolat-technical-vertuo-juan-lebron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/845-5_babolat-technical-vertuo-juan-lebron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68cbd789"
+      }
+    },
+    {
+      "age": "Junior (10–15)",
+      "sex": "Žena",
+      "level": "Velmi zdatný hráč / expert",
+      "preference": "Univerzálnost",
+      "product": {
+        "name": "Babolat Air Vertuo 2025",
+        "url": "https://www.zijpadel.cz/babolat-air-vertuo-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/815-4_babolat-air-vertuo-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c70039"
+      }
+    },
+    {
+      "age": "Junior (10–15)",
+      "sex": "Žena",
+      "level": "Začátečník",
+      "preference": "Kontrolu",
+      "product": {
+        "name": "Babolat Counter Origin 2025",
+        "url": "https://www.zijpadel.cz/babolat-counter-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/821-4_babolat-counter-origin-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c705d5"
+      }
+    },
+    {
+      "age": "Junior (10–15)",
+      "sex": "Žena",
+      "level": "Začátečník",
+      "preference": "Sílu",
+      "product": {
+        "name": "Babolat Air Origin 2025",
+        "url": "https://www.zijpadel.cz/babolat-air-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/1067-4_zijpadel-babolat-air-origin-raketa-detail-predni.jpg?68c6b1e8"
+      }
+    },
+    {
+      "age": "Junior (10–15)",
+      "sex": "Žena",
+      "level": "Začátečník",
+      "preference": "Univerzálnost",
+      "product": {
+        "name": "Babolat Air Origin 2025",
+        "url": "https://www.zijpadel.cz/babolat-air-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/1067-4_zijpadel-babolat-air-origin-raketa-detail-predni.jpg?68c6b1e8"
+      }
+    },
+    {
+      "age": "Senior (60+)",
+      "sex": "Muž",
+      "level": "Pokročilý",
+      "preference": "Kontrolu",
+      "product": {
+        "name": "Babolat Counter Vertuo 2025",
+        "url": "https://www.zijpadel.cz/babolat-counter-vertuo-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/827-4_babolat-counter-vertuo-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c708b3"
+      }
+    },
+    {
+      "age": "Senior (60+)",
+      "sex": "Muž",
+      "level": "Pokročilý",
+      "preference": "Sílu",
+      "product": {
+        "name": "Babolat Technical Vertuo Juan Lebron 2025",
+        "url": "https://www.zijpadel.cz/babolat-technical-vertuo-juan-lebron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/845-5_babolat-technical-vertuo-juan-lebron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68cbd789"
+      }
+    },
+    {
+      "age": "Senior (60+)",
+      "sex": "Muž",
+      "level": "Pokročilý",
+      "preference": "Univerzálnost",
+      "product": {
+        "name": "Babolat Air Vertuo 2025",
+        "url": "https://www.zijpadel.cz/babolat-air-vertuo-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/815-4_babolat-air-vertuo-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c70039"
+      }
+    },
+    {
+      "age": "Senior (60+)",
+      "sex": "Muž",
+      "level": "Velmi zdatný hráč / expert",
+      "preference": "Kontrolu",
+      "product": {
+        "name": "Babolat Counter Veron 2025",
+        "url": "https://www.zijpadel.cz/babolat-counter-veron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/824-4_babolat-counter-veron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c70725"
+      }
+    },
+    {
+      "age": "Senior (60+)",
+      "sex": "Muž",
+      "level": "Velmi zdatný hráč / expert",
+      "preference": "Sílu",
+      "product": {
+        "name": "Babolat Technical Veron Juan Lebron 2025",
+        "url": "https://www.zijpadel.cz/babolat-technical-veron-juan-lebron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/839-5_babolat-technical-veron-juan-lebron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68cbd789"
+      }
+    },
+    {
+      "age": "Senior (60+)",
+      "sex": "Muž",
+      "level": "Velmi zdatný hráč / expert",
+      "preference": "Univerzálnost",
+      "product": {
+        "url": "https://www.zijpadel.cz/babolat-air-veron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/812-4_babolat-air-veron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c6fdd4",
+        "name": "Babolat Air Veron 2025"
+      }
+    },
+    {
+      "age": "Senior (60+)",
+      "sex": "Muž",
+      "level": "Začátečník",
+      "preference": "Kontrolu",
+      "product": {
+        "name": "Babolat Counter Origin 2025",
+        "url": "https://www.zijpadel.cz/babolat-counter-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/821-4_babolat-counter-origin-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c705d5"
+      }
+    },
+    {
+      "age": "Senior (60+)",
+      "sex": "Muž",
+      "level": "Začátečník",
+      "preference": "Sílu",
+      "product": {
+        "name": "Babolat Air Origin 2025",
+        "url": "https://www.zijpadel.cz/babolat-air-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/1067-4_zijpadel-babolat-air-origin-raketa-detail-predni.jpg?68c6b1e8"
+      }
+    },
+    {
+      "age": "Senior (60+)",
+      "sex": "Muž",
+      "level": "Začátečník",
+      "preference": "Univerzálnost",
+      "product": {
+        "name": "Babolat Air Origin 2025",
+        "url": "https://www.zijpadel.cz/babolat-air-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/1067-4_zijpadel-babolat-air-origin-raketa-detail-predni.jpg?68c6b1e8"
+      }
+    },
+    {
+      "age": "Senior (60+)",
+      "sex": "Žena",
+      "level": "Pokročilý",
+      "preference": "Kontrolu",
+      "product": {
+        "name": "Babolat Counter Origin 2025",
+        "url": "https://www.zijpadel.cz/babolat-counter-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/827-4_babolat-counter-vertuo-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c708b3"
+      }
+    },
+    {
+      "age": "Senior (60+)",
+      "sex": "Žena",
+      "level": "Pokročilý",
+      "preference": "Sílu",
+      "product": {
+        "name": "Babolat Air Origin 2025",
+        "url": "https://www.zijpadel.cz/babolat-air-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/845-5_babolat-technical-vertuo-juan-lebron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68cbd789"
+      }
+    },
+    {
+      "age": "Senior (60+)",
+      "sex": "Žena",
+      "level": "Pokročilý",
+      "preference": "Univerzálnost",
+      "product": {
+        "name": "Babolat Air Origin 2025",
+        "url": "https://www.zijpadel.cz/babolat-air-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/815-4_babolat-air-vertuo-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c70039"
+      }
+    },
+    {
+      "age": "Senior (60+)",
+      "sex": "Žena",
+      "level": "Velmi zdatný hráč / expert",
+      "preference": "Kontrolu",
+      "product": {
+        "name": "Babolat Counter Vertuo 2025",
+        "url": "https://www.zijpadel.cz/babolat-counter-vertuo-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/824-4_babolat-counter-veron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c70725"
+      }
+    },
+    {
+      "age": "Senior (60+)",
+      "sex": "Žena",
+      "level": "Velmi zdatný hráč / expert",
+      "preference": "Sílu",
+      "product": {
+        "name": "Babolat Technical Vertuo Juan Lebron 2025",
+        "url": "https://www.zijpadel.cz/babolat-technical-vertuo-juan-lebron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/839-5_babolat-technical-veron-juan-lebron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68cbd789"
+      }
+    },
+    {
+      "age": "Senior (60+)",
+      "sex": "Žena",
+      "level": "Velmi zdatný hráč / expert",
+      "preference": "Univerzálnost",
+      "product": {
+        "name": "Babolat Air Vertuo 2025",
+        "url": "https://www.zijpadel.cz/babolat-air-vertuo-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/812-4_babolat-air-veron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c6fdd4"
+      }
+    },
+    {
+      "age": "Senior (60+)",
+      "sex": "Žena",
+      "level": "Začátečník",
+      "preference": "Kontrolu",
+      "product": {
+        "name": "Babolat Counter Origin 2025",
+        "url": "https://www.zijpadel.cz/babolat-counter-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/821-4_babolat-counter-origin-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c705d5"
+      }
+    },
+    {
+      "age": "Senior (60+)",
+      "sex": "Žena",
+      "level": "Začátečník",
+      "preference": "Sílu",
+      "product": {
+        "name": "Babolat Air Origin 2025",
+        "url": "https://www.zijpadel.cz/babolat-air-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/1067-4_zijpadel-babolat-air-origin-raketa-detail-predni.jpg?68c6b1e8"
+      }
+    },
+    {
+      "age": "Senior (60+)",
+      "sex": "Žena",
+      "level": "Začátečník",
+      "preference": "Univerzálnost",
+      "product": {
+        "name": "Babolat Air Origin 2025",
+        "url": "https://www.zijpadel.cz/babolat-air-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder",
+        "image": "https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/1067-4_zijpadel-babolat-air-origin-raketa-detail-predni.jpg?68c6b1e8"
+      }
+    }
+  ]
+}
