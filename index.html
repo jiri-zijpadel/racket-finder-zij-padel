@@ -356,5 +356,47 @@
       setProgress();
     });
   </script>
+  <script>
+(function () {
+  function getHeight() {
+    // vezmeme největší z relevantních výšek
+    const body = document.body;
+    const html = document.documentElement;
+    return Math.max(
+      body.scrollHeight, body.offsetHeight,
+      html.clientHeight, html.scrollHeight, html.offsetHeight
+    );
+  }
+
+  let raf = null;
+  function sendHeight() {
+    if (raf) cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      const h = getHeight();
+      window.parent.postMessage(
+        { type: 'ZP_IFRAME_HEIGHT', height: h },
+        '*'
+      );
+    });
+  }
+
+  // posílej výšku po načtení
+  window.addEventListener('load', sendHeight);
+  // posílej výšku při resize
+  window.addEventListener('resize', sendHeight);
+
+  // posílej výšku při změnách DOM (kroky kvízu, výsledek, obrázek, atd.)
+  const mo = new MutationObserver(sendHeight);
+  mo.observe(document.documentElement, { childList: true, subtree: true, attributes: true });
+
+  // i když se teprve dočítají obrázky, po načtení obrázku znovu pošli výšku
+  document.addEventListener('load', (e) => {
+    if (e.target && e.target.tagName === 'IMG') sendHeight();
+  }, true);
+
+  // první “ping” hned
+  sendHeight();
+})();
+</script>
 </body>
 </html>
