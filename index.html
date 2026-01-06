@@ -1,6 +1,13 @@
-<p><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /></p>
-<style><!--
-:root { --zp-navy:#003d79; --zp-lime:#c6e801; --zp-text:#1e1e1e; --zp-muted:#f6f8fb; --zp-border:rgba(0,61,121,.16);}
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Racket Finder – Žij padel</title>
+
+  <style>
+    :root { --zp-navy:#003d79; --zp-lime:#c6e801; --zp-text:#1e1e1e; --zp-muted:#f6f8fb; --zp-border:rgba(0,61,121,.16);}
+
     #zp-quiz { font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; max-width:880px; margin:0 auto; padding:20px; color:var(--zp-text);}
     .zp-quiz__card { background:#fff; border:1px solid var(--zp-border); border-radius:16px; box-shadow:0 6px 22px rgba(0,0,0,.06); overflow:hidden;}
     .zp-quiz__title { font-size:26px; font-weight:700; color:var(--zp-navy); text-align:center; margin:20px 0 10px;}
@@ -10,163 +17,202 @@
     .zp-quiz__progress { padding:0 20px 8px; }
     .zp-quiz__progress-label { font-size:13px; color:#5a5a5a; margin-top:8px; text-align:right; }
     .zp-quiz__body { padding:20px; }
+
     .zp-step { display:none; } .zp-step.active { display:block; }
     .zp-step h3 { font-size:20px; color:var(--zp-navy); margin:0 0 14px; line-height:1.3; }
-    .zp-options { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; } @media (max-width:860px){ .zp-options{ grid-template-columns:repeat(2,1fr);}} @media (max-width:520px){ .zp-options{ grid-template-columns:1fr;}}
+
+    .zp-options { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+    @media (max-width:860px){ .zp-options{ grid-template-columns:repeat(2,1fr);} }
+    @media (max-width:520px){ .zp-options{ grid-template-columns:1fr;} }
+
     .zp-option { border:1px solid var(--zp-border); border-radius:12px; padding:14px; background:#fff; cursor:pointer; transition:transform .15s ease, box-shadow .2s ease, border-color .2s ease; user-select:none; min-height:64px; display:flex; align-items:center; justify-content:space-between; gap:10px;}
     .zp-option:hover { transform:translateY(-1px); box-shadow:0 4px 14px rgba(0,0,0,.06);}
     .zp-option.selected { border-color:var(--zp-lime); box-shadow:0 4px 18px rgba(198,232,1,.22);}
     .zp-option__label { font-size:15px; font-weight:600;}
     .zp-option__dot { width:18px; height:18px; border-radius:50%; border:2px solid var(--zp-border); position:relative; flex:0 0 auto; }
-    .zp-option.selected .zp-option__dot { border-color:var(--zp-lime);} .zp-option.selected .zp-option__dot::after { content:''; position:absolute; inset:3px; border-radius:50%; background:var(--zp-lime);}
+    .zp-option.selected .zp-option__dot { border-color:var(--zp-lime);}
+    .zp-option.selected .zp-option__dot::after { content:''; position:absolute; inset:3px; border-radius:50%; background:var(--zp-lime);}
+
     .zp-quiz__nav { display:flex; justify-content:space-between; gap:12px; margin-top:18px;}
     .zp-btn { appearance:none; border:0; cursor:pointer; border-radius:10px; padding:12px 16px; font-weight:700; font-size:15px; display:inline-flex; align-items:center; gap:8px; }
     .zp-btn--primary { background:var(--zp-lime); color:#0b0b0b; box-shadow:0 6px 16px rgba(198,232,1,.35);}
     .zp-btn--ghost { background:#fff; color:var(--zp-navy); border:1px solid var(--zp-border);}
+
     .zp-result { text-align:center; padding:0 6px; }
-    .zp-quiz__result-media { display:grid; grid-template-columns:360px 1fr; gap:18px; align-items:center; margin:18px 0; } @media (max-width:760px){ .zp-quiz__result-media{ grid-template-columns:1fr;}}
+    .zp-quiz__result-media { display:grid; grid-template-columns:360px 1fr; gap:18px; align-items:center; margin:18px 0; }
+    @media (max-width:760px){ .zp-quiz__result-media{ grid-template-columns:1fr;} }
     .zp-quiz__result-image { width:100%; aspect-ratio:4/5; border:1px solid var(--zp-border); border-radius:12px; overflow:hidden; background:#fff; display:grid; place-items:center; }
     .zp-quiz__result-image img { display:block; width:100%; height:100%; object-fit:contain; }
     .zp-quiz__result-image--placeholder { width:100%; height:100%; display:grid; place-items:center; background:linear-gradient(135deg,#f7f9fc,#eef3fb); color:#6a6a6a; font-weight:600; font-size:14px; text-align:center; padding:16px; }
+
     .zp-result__title { font-size:24px; color:var(--zp-navy); margin:6px 0 6px; }
     .zp-helper { font-size:12px; color:#6a6a6a; margin-top:8px; }
---></style>
-<div id="zp-quiz" class="zp-quiz__card">
-<div class="zp-quiz__header">
-<h2 class="zp-quiz__title">Vyhledávač padelovových raket</h2>
-<p class="zp-quiz__subtitle">Najdeme ti ideální padelovou raketu během pár kliknutí.</p>
-<div class="zp-quiz__progress">
-<div class="zp-quiz__progressbar">&nbsp;</div>
-<div class="zp-quiz__progress-label"><span id="zp-progress-label">Krok 1 z 5</span></div>
-</div>
-</div>
-<div class="zp-quiz__body">
-<section class="zp-step active" data-step="age" aria-label="Věk">
-<h3>Kolik je ti let?</h3>
-<div class="zp-options" role="group" aria-label="Věkové rozmezí"><button class="zp-option" data-value="Dítě (6–15)"><span class="zp-option__label">Dítě (6–15)</span><span class="zp-option__dot"></span></button> <button class="zp-option" data-value="Dospělý (16–59)"><span class="zp-option__label">Dospělý (16–59)</span><span class="zp-option__dot"></span></button> <button class="zp-option" data-value="Senior (60+)"><span class="zp-option__label">Senior (60+)</span><span class="zp-option__dot"></span></button></div>
-<div class="zp-quiz__nav"><button class="zp-btn zp-btn--ghost" data-action="back" disabled="disabled">Předchozí</button> <button class="zp-btn zp-btn--primary" data-action="next" disabled="disabled">Pokračovat</button></div>
-</section>
-<section class="zp-step" data-step="sex" aria-label="Pohlaví">
-<h3>Jaké je tvoje pohlaví?</h3>
-<div class="zp-options" role="group" aria-label="Pohlaví"><button class="zp-option" data-value="Muž"><span class="zp-option__label">Muž</span><span class="zp-option__dot"></span></button> <button class="zp-option" data-value="Žena"><span class="zp-option__label">Žena</span><span class="zp-option__dot"></span></button></div>
-<div class="zp-quiz__nav"><button class="zp-btn zp-btn--ghost" data-action="back">Předchozí</button> <button class="zp-btn zp-btn--primary" data-action="next" disabled="disabled">Pokračovat</button></div>
-</section>
-<section class="zp-step" data-step="frequency" aria-label="Frekvence hraní">
-<h3>Jak často hraješ?</h3>
-<div class="zp-options" role="group"><button class="zp-option" data-value="1–2× měsíčně"><span class="zp-option__label">1–2× měsíčně</span><span class="zp-option__dot"></span></button> <button class="zp-option" data-value="1× týdně"><span class="zp-option__label">1× týdně</span><span class="zp-option__dot"></span></button> <button class="zp-option" data-value="2–3× týdně"><span class="zp-option__label">2–3× týdně</span><span class="zp-option__dot"></span></button></div>
-<div class="zp-quiz__nav"><button class="zp-btn zp-btn--ghost" data-action="back">Předchozí</button> <button class="zp-btn zp-btn--primary" data-action="next" disabled="disabled">Pokračovat</button></div>
-</section>
-<section class="zp-step" data-step="level" aria-label="Úroveň hráče">
-<h3>Jaká je tvoje úroveň?</h3>
-<div class="zp-options" role="group"><button class="zp-option" data-value="Začátečník"><span class="zp-option__label">Začátečník</span><span class="zp-option__dot"></span></button> <button class="zp-option" data-value="Pokročilý"><span class="zp-option__label">Pokročilý</span><span class="zp-option__dot"></span></button> <button class="zp-option" data-value="Velmi zdatný hráč / expert"><span class="zp-option__label">Pokročilý až expert</span><span class="zp-option__dot"></span></button></div>
-<div class="zp-quiz__nav"><button class="zp-btn zp-btn--ghost" data-action="back">Předchozí</button> <button class="zp-btn zp-btn--primary" data-action="next" disabled="disabled">Pokračovat</button></div>
-</section>
-<section class="zp-step" data-step="preference" aria-label="Preferovaný styl">
-<h3>Co preferuješ?</h3>
-<div class="zp-options" role="group"><button class="zp-option" data-value="Kontrolu"><span class="zp-option__label">Kontrolu</span><span class="zp-option__dot"></span></button> <button class="zp-option" data-value="Univerzálnost"><span class="zp-option__label">Univerzálnost</span><span class="zp-option__dot"></span></button> <button class="zp-option" data-value="Sílu"><span class="zp-option__label">Sílu</span><span class="zp-option__dot"></span></button></div>
-<div class="zp-quiz__nav"><button class="zp-btn zp-btn--ghost" data-action="back">Předchozí</button> <button class="zp-btn zp-btn--primary" data-action="finish" disabled="disabled">Zobrazit doporučení</button></div>
-</section>
-<section class="zp-step" data-step="result" aria-label="Doporučení" tabindex="-1">
-<div class="zp-result">
-<div class="zp-quiz__result-media">
-<div class="zp-quiz__result-image" id="zp-result-image">
-<div class="zp-quiz__result-image--placeholder">Obrázek produktu<br /><small>(doplňte v RULES)</small></div>
-</div>
-<div><span class="zp-helper">Doporučení</span>
-<h3 class="zp-result__title" id="zp-result-title">—</h3>
-<p class="zp-helper" id="zp-result-subtitle">—</p>
-<div id="zp-result-desc">Na základě tvých odpovědí jsme vybrali raketu, která by ti měla sedět.</div>
-<div class="zp-quiz__nav" style="justify-content: center; margin-top: 12px;"><button class="zp-btn zp-btn--ghost" data-action="restart">Začít znovu</button> <span id="zp-result-cta"></span></div>
-</div>
-</div>
-</div>
-</section>
-</div>
-</div>
-<p>
-<script>document.addEventListener("DOMContentLoaded", function() {
-  const jsCode = `
-    (function() {
+
+    .zp-error {
+      display:none;
+      margin: 12px 20px 0;
+      padding: 12px 14px;
+      border: 1px solid rgba(220,38,38,.25);
+      background: rgba(220,38,38,.06);
+      color: #991b1b;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .zp-error code { font-weight: 700; }
+  </style>
+</head>
+
+<body>
+  <div id="zp-quiz" class="zp-quiz__card">
+    <div class="zp-quiz__header">
+      <h2 class="zp-quiz__title">Vyhledávač padelovových raket</h2>
+      <p class="zp-quiz__subtitle">Najdeme ti ideální padelovou raketu během pár kliknutí.</p>
+
+      <div class="zp-quiz__progress">
+        <div class="zp-quiz__progressbar"><span></span></div>
+        <div class="zp-quiz__progress-label"><span id="zp-progress-label">Krok 1 z 5</span></div>
+      </div>
+
+      <div id="zp-error" class="zp-error"></div>
+    </div>
+
+    <div class="zp-quiz__body">
+      <section class="zp-step active" data-step="age" aria-label="Věk">
+        <h3>Kolik je ti let?</h3>
+        <div class="zp-options" role="group" aria-label="Věkové rozmezí">
+          <button class="zp-option" data-value="Dítě (6–15)"><span class="zp-option__label">Dítě (6–15)</span><span class="zp-option__dot"></span></button>
+          <button class="zp-option" data-value="Dospělý (16–59)"><span class="zp-option__label">Dospělý (16–59)</span><span class="zp-option__dot"></span></button>
+          <button class="zp-option" data-value="Senior (60+)"><span class="zp-option__label">Senior (60+)</span><span class="zp-option__dot"></span></button>
+        </div>
+        <div class="zp-quiz__nav">
+          <button class="zp-btn zp-btn--ghost" data-action="back" disabled>Předchozí</button>
+          <button class="zp-btn zp-btn--primary" data-action="next" disabled>Pokračovat</button>
+        </div>
+      </section>
+
+      <section class="zp-step" data-step="sex" aria-label="Pohlaví">
+        <h3>Jaké je tvoje pohlaví?</h3>
+        <div class="zp-options" role="group" aria-label="Pohlaví">
+          <button class="zp-option" data-value="Muž"><span class="zp-option__label">Muž</span><span class="zp-option__dot"></span></button>
+          <button class="zp-option" data-value="Žena"><span class="zp-option__label">Žena</span><span class="zp-option__dot"></span></button>
+        </div>
+        <div class="zp-quiz__nav">
+          <button class="zp-btn zp-btn--ghost" data-action="back">Předchozí</button>
+          <button class="zp-btn zp-btn--primary" data-action="next" disabled>Pokračovat</button>
+        </div>
+      </section>
+
+      <section class="zp-step" data-step="frequency" aria-label="Frekvence hraní">
+        <h3>Jak často hraješ?</h3>
+        <div class="zp-options" role="group" aria-label="Frekvence">
+          <button class="zp-option" data-value="1–2× měsíčně"><span class="zp-option__label">1–2× měsíčně</span><span class="zp-option__dot"></span></button>
+          <button class="zp-option" data-value="1× týdně"><span class="zp-option__label">1× týdně</span><span class="zp-option__dot"></span></button>
+          <button class="zp-option" data-value="2–3× týdně"><span class="zp-option__label">2–3× týdně</span><span class="zp-option__dot"></span></button>
+        </div>
+        <div class="zp-quiz__nav">
+          <button class="zp-btn zp-btn--ghost" data-action="back">Předchozí</button>
+          <button class="zp-btn zp-btn--primary" data-action="next" disabled>Pokračovat</button>
+        </div>
+      </section>
+
+      <section class="zp-step" data-step="level" aria-label="Úroveň hráče">
+        <h3>Jaká je tvoje úroveň?</h3>
+        <div class="zp-options" role="group" aria-label="Úroveň">
+          <button class="zp-option" data-value="Začátečník"><span class="zp-option__label">Začátečník</span><span class="zp-option__dot"></span></button>
+          <button class="zp-option" data-value="Pokročilý"><span class="zp-option__label">Pokročilý</span><span class="zp-option__dot"></span></button>
+          <button class="zp-option" data-value="Velmi zdatný hráč / expert"><span class="zp-option__label">Pokročilý až expert</span><span class="zp-option__dot"></span></button>
+        </div>
+        <div class="zp-quiz__nav">
+          <button class="zp-btn zp-btn--ghost" data-action="back">Předchozí</button>
+          <button class="zp-btn zp-btn--primary" data-action="next" disabled>Pokračovat</button>
+        </div>
+      </section>
+
+      <section class="zp-step" data-step="preference" aria-label="Preferovaný styl">
+        <h3>Co preferuješ?</h3>
+        <div class="zp-options" role="group" aria-label="Preference">
+          <button class="zp-option" data-value="Kontrolu"><span class="zp-option__label">Kontrolu</span><span class="zp-option__dot"></span></button>
+          <button class="zp-option" data-value="Univerzálnost"><span class="zp-option__label">Univerzálnost</span><span class="zp-option__dot"></span></button>
+          <button class="zp-option" data-value="Sílu"><span class="zp-option__label">Sílu</span><span class="zp-option__dot"></span></button>
+        </div>
+        <div class="zp-quiz__nav">
+          <button class="zp-btn zp-btn--ghost" data-action="back">Předchozí</button>
+          <button class="zp-btn zp-btn--primary" data-action="finish" disabled>Zobrazit doporučení</button>
+        </div>
+      </section>
+
+      <section class="zp-step" data-step="result" aria-label="Doporučení" tabindex="-1">
+        <div class="zp-result">
+          <div class="zp-quiz__result-media">
+            <div class="zp-quiz__result-image" id="zp-result-image">
+              <div class="zp-quiz__result-image--placeholder">Obrázek produktu<br><small>(doplňte v RULES)</small></div>
+            </div>
+            <div>
+              <span class="zp-helper">Doporučení</span>
+              <h3 class="zp-result__title" id="zp-result-title">—</h3>
+              <p class="zp-helper" id="zp-result-subtitle">—</p>
+              <div id="zp-result-desc">Na základě tvých odpovědí jsme vybrali raketu, která by ti měla sedět.</div>
+              <div class="zp-quiz__nav" style="justify-content:center; margin-top:12px;">
+                <button class="zp-btn zp-btn--ghost" data-action="restart">Začít znovu</button>
+                <span id="zp-result-cta"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const RULES_URL = './data/zp-racket-rules.json';
+
       const root = document.getElementById('zp-quiz');
       if (!root) return;
 
-      const steps = Array.from(root.querySelectorAll('.zp-step'));
-      let progressBarWrapper = root.querySelector('.zp-quiz__progressbar');
-let progressBar = root.querySelector('.zp-quiz__progressbar > span');
-if (!progressBar) {
-  progressBar = document.createElement('span');
-  progressBarWrapper.innerHTML = ''; // vymaž &nbsp;
-  progressBarWrapper.appendChild(progressBar);
-}
-      const progressLabel = root.querySelector('#zp-progress-label');
-      const ORDER = ['age','sex','frequency','level','preference','result'];
-      const RESULT_INDEX = ORDER.indexOf('result');
-      const state = { stepIndex: 0, answers: { age:null, sex:null, frequency:null, level:null, preference:null } };
-
-      const CHILD_PRODUCT = {
-        name: 'Babolat Alioth Junior',
-        url: 'https://www.zijpadel.cz/babolat-alioth-junior/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder',
-        image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/1142-3_zijpadel-babolat-alioth-jr-2026-hlavni-jpeg.jpg?68ea322b'
+      const errorBox = document.getElementById('zp-error');
+      const showError = (msg) => {
+        if (!errorBox) return;
+        errorBox.style.display = 'block';
+        errorBox.innerHTML = msg;
       };
 
-  const RULES = [
-        { age: 'Dospělý (16–59)', sex: 'Muž', level: 'Pokročilý', preference: 'Kontrolu', product: { name: 'Babolat Counter Veron 2025', url: 'https://www.zijpadel.cz/babolat-counter-veron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/824-4_babolat-counter-veron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c70725' } },
-        { age: 'Dospělý (16–59)', sex: 'Muž', level: 'Pokročilý', preference: 'Sílu', product: { name: 'Babolat Technical Veron Juan Lebron 2025', url: 'https://www.zijpadel.cz/babolat-technical-veron-juan-lebron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/839-5_babolat-technical-veron-juan-lebron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68cbd789' } },
-        { age: 'Dospělý (16–59)', sex: 'Muž', level: 'Pokročilý', preference: 'Univerzálnost', product: { name: 'Babolat Air Veron 2025', url: 'https://www.zijpadel.cz/babolat-air-veron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/812-4_babolat-air-veron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c6fdd4' } },
-        { age: 'Dospělý (16–59)', sex: 'Muž', level: 'Velmi zdatný hráč / expert', preference: 'Kontrolu', product: { name: 'Babolat Counter Viper 2025', url: 'https://www.zijpadel.cz/babolat-counter-viper-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/830-4_babolat-counter-viper-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c70a24' } },
-        { age: 'Dospělý (16–59)', sex: 'Muž', level: 'Velmi zdatný hráč / expert', preference: 'Sílu', product: { name: 'Babolat Technical Viper Juan Lebron 2025', url: 'https://www.zijpadel.cz/babolat-technical-viper-juan-lebron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/1070-3_babolat-technical-viper-juan-lebron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68cbd789' } },
-        { age: 'Dospělý (16–59)', sex: 'Muž', level: 'Velmi zdatný hráč / expert', preference: 'Univerzálnost', product: { name: 'Babolat Air Viper 2025', url: 'https://www.zijpadel.cz/babolat-air-viper-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/818-4_babolat-air-viper-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c701b6' } },
-        { age: 'Dospělý (16–59)', sex: 'Muž', level: 'Začátečník', preference: 'Kontrolu', product: { name: 'Babolat Counter Vertuo 2025', url: 'https://www.zijpadel.cz/babolat-counter-vertuo-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/827-4_babolat-counter-vertuo-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c708b3' } },
-        { age: 'Dospělý (16–59)', sex: 'Muž', level: 'Začátečník', preference: 'Sílu', product: { name: 'Babolat Technical Vertuo Juan Lebron 2025', url: 'https://www.zijpadel.cz/babolat-technical-vertuo-juan-lebron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/845-5_babolat-technical-vertuo-juan-lebron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68cbd789;")' } },
-        { age: 'Dospělý (16–59)', sex: 'Muž', level: 'Začátečník', preference: 'Univerzálnost', product: { name: 'Babolat Air Vertuo 2025', url: 'https://www.zijpadel.cz/babolat-air-vertuo-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/815-4_babolat-air-vertuo-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c70039' } },
-        { age: 'Dospělý (16–59)', sex: 'Žena', level: 'Pokročilý', preference: 'Kontrolu', product: { name: 'Babolat Counter Veron 2025', url: 'https://www.zijpadel.cz/babolat-counter-veron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/824-4_babolat-counter-veron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c70725' } },
-        { age: 'Dospělý (16–59)', sex: 'Žena', level: 'Pokročilý', preference: 'Sílu', product: { name: 'Babolat Technical Veron Juan Lebron 2025', url: 'https://www.zijpadel.cz/babolat-technical-veron-juan-lebron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/839-5_babolat-technical-veron-juan-lebron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68cbd789' } },
-        { age: 'Dospělý (16–59)', sex: 'Žena', level: 'Pokročilý', preference: 'Univerzálnost', product: { name: 'Babolat Air Veron 2025', url: 'https://www.zijpadel.cz/babolat-air-veron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/812-4_babolat-air-veron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c6fdd4' } },
-        { age: 'Dospělý (16–59)', sex: 'Žena', level: 'Velmi zdatný hráč / expert', preference: 'Kontrolu', product: { name: 'Babolat Counter Viper 2025', url: 'https://www.zijpadel.cz/babolat-counter-viper-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/830-4_babolat-counter-viper-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c70a24' } },
-        { age: 'Dospělý (16–59)', sex: 'Žena', level: 'Velmi zdatný hráč / expert', preference: 'Sílu', product: { name: 'Babolat Technical Viper Juan Lebron 2025', url: 'https://www.zijpadel.cz/babolat-technical-viper-juan-lebron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/1070-3_babolat-technical-viper-juan-lebron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68cbd789' } },
-        { age: 'Dospělý (16–59)', sex: 'Žena', level: 'Velmi zdatný hráč / expert', preference: 'Univerzálnost', product: { name: 'Babolat Air Viper 2025', url: 'https://www.zijpadel.cz/babolat-air-viper-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/818-4_babolat-air-viper-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c701b6' } },
-        { age: 'Dospělý (16–59)', sex: 'Žena', level: 'Začátečník', preference: 'Kontrolu', product: { name: 'Babolat Counter Vertuo 2025', url: 'https://www.zijpadel.cz/babolat-counter-vertuo-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/827-4_babolat-counter-vertuo-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c708b3' } },
-        { age: 'Dospělý (16–59)', sex: 'Žena', level: 'Začátečník', preference: 'Sílu', product: { name: 'Babolat Technical Vertuo Juan Lebron 2025', url: 'https://www.zijpadel.cz/babolat-technical-vertuo-juan-lebron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/845-5_babolat-technical-vertuo-juan-lebron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68cbd789;")' } },
-        { age: 'Dospělý (16–59)', sex: 'Žena', level: 'Začátečník', preference: 'Univerzálnost', product: { name: 'Babolat Air Vertuo 2025', url: 'https://www.zijpadel.cz/babolat-air-vertuo-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/815-4_babolat-air-vertuo-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c70039' } },
-        { age: 'Junior (10–15)', sex: 'Muž', level: 'Pokročilý', preference: 'Kontrolu', product: { name: 'Babolat Counter Vertuo 2025', url: 'https://www.zijpadel.cz/babolat-counter-vertuo-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/827-4_babolat-counter-vertuo-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c708b3' } },
-        { age: 'Junior (10–15)', sex: 'Muž', level: 'Pokročilý', preference: 'Sílu', product: { name: 'Babolat Technical Vertuo Juan Lebron 2025', url: 'https://www.zijpadel.cz/babolat-technical-vertuo-juan-lebron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/845-5_babolat-technical-vertuo-juan-lebron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68cbd789;")' } },
-        { age: 'Junior (10–15)', sex: 'Muž', level: 'Pokročilý', preference: 'Univerzálnost', product: { name: 'Babolat Air Vertuo 2025', url: 'https://www.zijpadel.cz/babolat-air-vertuo-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/815-4_babolat-air-vertuo-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c70039' } },
-        { age: 'Junior (10–15)', sex: 'Muž', level: 'Velmi zdatný hráč / expert', preference: 'Kontrolu', product: { name: 'Babolat Counter Vertuo 2025', url: 'https://www.zijpadel.cz/babolat-counter-vertuo-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/827-4_babolat-counter-vertuo-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c708b3' } },
-        { age: 'Junior (10–15)', sex: 'Muž', level: 'Velmi zdatný hráč / expert', preference: 'Sílu', product: { name: 'Babolat Technical Vertuo Juan Lebron 2025', url: 'https://www.zijpadel.cz/babolat-technical-vertuo-juan-lebron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/845-5_babolat-technical-vertuo-juan-lebron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68cbd789;")' } },
-        { age: 'Junior (10–15)', sex: 'Muž', level: 'Velmi zdatný hráč / expert', preference: 'Univerzálnost', product: { name: 'Babolat Air Vertuo 2025', url: 'https://www.zijpadel.cz/babolat-air-vertuo-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/815-4_babolat-air-vertuo-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c70039' } },
-        { age: 'Junior (10–15)', sex: 'Muž', level: 'Začátečník', preference: 'Kontrolu', product: { name: 'Babolat Counter Origin 2025', url: 'https://www.zijpadel.cz/babolat-counter-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/821-4_babolat-counter-origin-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c705d5' } },
-        { age: 'Junior (10–15)', sex: 'Muž', level: 'Začátečník', preference: 'Sílu', product: { name: 'Babolat Air Origin 2025', url: 'https://www.zijpadel.cz/babolat-air-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/1067-4_zijpadel-babolat-air-origin-raketa-detail-predni.jpg?68c6b1e8' } },
-        { age: 'Junior (10–15)', sex: 'Muž', level: 'Začátečník', preference: 'Univerzálnost', product: { name: 'Babolat Air Origin 2025', url: 'https://www.zijpadel.cz/babolat-air-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/1067-4_zijpadel-babolat-air-origin-raketa-detail-predni.jpg?68c6b1e8' } },
-        { age: 'Junior (10–15)', sex: 'Žena', level: 'Pokročilý', preference: 'Kontrolu', product: { name: 'Babolat Counter Origin 2025', url: 'https://www.zijpadel.cz/babolat-counter-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/821-4_babolat-counter-origin-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c705d5' } },
-        { age: 'Junior (10–15)', sex: 'Žena', level: 'Pokročilý', preference: 'Sílu', product: { name: 'Babolat Air Origin 2025', url: 'https://www.zijpadel.cz/babolat-air-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/1067-4_zijpadel-babolat-air-origin-raketa-detail-predni.jpg?68c6b1e8' } },
-        { age: 'Junior (10–15)', sex: 'Žena', level: 'Pokročilý', preference: 'Univerzálnost', product: { name: 'Babolat Air Origin 2025', url: 'https://www.zijpadel.cz/babolat-air-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/1067-4_zijpadel-babolat-air-origin-raketa-detail-predni.jpg?68c6b1e8' } },
-        { age: 'Junior (10–15)', sex: 'Žena', level: 'Velmi zdatný hráč / expert', preference: 'Kontrolu', product: { name: 'Babolat Counter Vertuo 2025', url: 'https://www.zijpadel.cz/babolat-counter-vertuo-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/827-4_babolat-counter-vertuo-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c708b3' } },
-        { age: 'Junior (10–15)', sex: 'Žena', level: 'Velmi zdatný hráč / expert', preference: 'Sílu', product: { name: 'Babolat Technical Vertuo Juan Lebron 2025', url: 'https://www.zijpadel.cz/babolat-technical-vertuo-juan-lebron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/845-5_babolat-technical-vertuo-juan-lebron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68cbd789;")' } },
-        { age: 'Junior (10–15)', sex: 'Žena', level: 'Velmi zdatný hráč / expert', preference: 'Univerzálnost', product: { name: 'Babolat Air Vertuo 2025', url: 'https://www.zijpadel.cz/babolat-air-vertuo-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/815-4_babolat-air-vertuo-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c70039' } },
-        { age: 'Junior (10–15)', sex: 'Žena', level: 'Začátečník', preference: 'Kontrolu', product: { name: 'Babolat Counter Origin 2025', url: 'https://www.zijpadel.cz/babolat-counter-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/821-4_babolat-counter-origin-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c705d5' } },
-        { age: 'Junior (10–15)', sex: 'Žena', level: 'Začátečník', preference: 'Sílu', product: { name: 'Babolat Air Origin 2025', url: 'https://www.zijpadel.cz/babolat-air-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/1067-4_zijpadel-babolat-air-origin-raketa-detail-predni.jpg?68c6b1e8' } },
-        { age: 'Junior (10–15)', sex: 'Žena', level: 'Začátečník', preference: 'Univerzálnost', product: { name: 'Babolat Air Origin 2025', url: 'https://www.zijpadel.cz/babolat-air-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/1067-4_zijpadel-babolat-air-origin-raketa-detail-predni.jpg?68c6b1e8' } },
-        { age: 'Senior (60+)', sex: 'Muž', level: 'Pokročilý', preference: 'Kontrolu', product: { name: 'Babolat Counter Vertuo 2025', url: 'https://www.zijpadel.cz/babolat-counter-vertuo-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/827-4_babolat-counter-vertuo-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c708b3' } },
-        { age: 'Senior (60+)', sex: 'Muž', level: 'Pokročilý', preference: 'Sílu', product: { name: 'Babolat Technical Vertuo Juan Lebron 2025', url: 'https://www.zijpadel.cz/babolat-technical-vertuo-juan-lebron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/845-5_babolat-technical-vertuo-juan-lebron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68cbd789;")' } },
-        { age: 'Senior (60+)', sex: 'Muž', level: 'Pokročilý', preference: 'Univerzálnost', product: { name: 'Babolat Air Vertuo 2025', url: 'https://www.zijpadel.cz/babolat-air-vertuo-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/815-4_babolat-air-vertuo-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c70039' } },
-        { age: 'Senior (60+)', sex: 'Muž', level: 'Velmi zdatný hráč / expert', preference: 'Kontrolu', product: { name: 'Babolat Counter Veron 2025', url: 'https://www.zijpadel.cz/babolat-counter-veron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/824-4_babolat-counter-veron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c70725' } },
-        { age: 'Senior (60+)', sex: 'Muž', level: 'Velmi zdatný hráč / expert', preference: 'Sílu', product: { name: 'Babolat Technical Veron Juan Lebron 2025', url: 'https://www.zijpadel.cz/babolat-technical-veron-juan-lebron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/839-5_babolat-technical-veron-juan-lebron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68cbd789' } },
-        { age: 'Senior (60+)', sex: 'Muž', level: 'Velmi zdatný hráč / expert', preference: 'Univerzálnost', product: { Name: 'Babolat Air Veron 2025', url: 'https://www.zijpadel.cz/babolat-air-veron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/812-4_babolat-air-veron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c6fdd4' } },
-        { age: 'Senior (60+)', sex: 'Muž', level: 'Začátečník', preference: 'Kontrolu', product: { name: 'Babolat Counter Origin 2025', url: 'https://www.zijpadel.cz/babolat-counter-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/821-4_babolat-counter-origin-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c705d5' } },
-        { age: 'Senior (60+)', sex: 'Muž', level: 'Začátečník', preference: 'Sílu', product: { name: 'Babolat Air Origin 2025', url: 'https://www.zijpadel.cz/babolat-air-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/1067-4_zijpadel-babolat-air-origin-raketa-detail-predni.jpg?68c6b1e8' } },
-        { age: 'Senior (60+)', sex: 'Muž', level: 'Začátečník', preference: 'Univerzálnost', product: { name: 'Babolat Air Origin 2025', url: 'https://www.zijpadel.cz/babolat-air-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/1067-4_zijpadel-babolat-air-origin-raketa-detail-predni.jpg?68c6b1e8' } },
-        { age: 'Senior (60+)', sex: 'Žena', level: 'Pokročilý', preference: 'Kontrolu', product: { name: 'Babolat Counter Origin 2025', url: 'https://www.zijpadel.cz/babolat-counter-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/827-4_babolat-counter-vertuo-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c708b3' } },
-        { age: 'Senior (60+)', sex: 'Žena', level: 'Pokročilý', preference: 'Sílu', product: { name: 'Babolat Air Origin 2025', url: 'https://www.zijpadel.cz/babolat-air-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/845-5_babolat-technical-vertuo-juan-lebron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68cbd789;")' } },
-        { age: 'Senior (60+)', sex: 'Žena', level: 'Pokročilý', preference: 'Univerzálnost', product: { name: 'Babolat Air Origin 2025', url: 'https://www.zijpadel.cz/babolat-air-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/815-4_babolat-air-vertuo-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c70039' } },
-        { age: 'Senior (60+)', sex: 'Žena', level: 'Velmi zdatný hráč / expert', preference: 'Kontrolu', product: { name: 'Babolat Counter Vertuo 2025', url: 'https://www.zijpadel.cz/babolat-counter-vertuo-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/824-4_babolat-counter-veron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c70725' } },
-        { age: 'Senior (60+)', sex: 'Žena', level: 'Velmi zdatný hráč / expert', preference: 'Sílu', product: { name: 'Babolat Technical Vertuo Juan Lebron 2025', url: 'https://www.zijpadel.cz/babolat-technical-vertuo-juan-lebron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/839-5_babolat-technical-veron-juan-lebron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68cbd789' } },
-        { age: 'Senior (60+)', sex: 'Žena', level: 'Velmi zdatný hráč / expert', preference: 'Univerzálnost', product: { name: 'Babolat Air Vertuo 2025', url: 'https://www.zijpadel.cz/babolat-air-vertuo-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/812-4_babolat-air-veron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c6fdd4' } },
-        { age: 'Senior (60+)', sex: 'Žena', level: 'Začátečník', preference: 'Kontrolu', product: { name: 'Babolat Counter Origin 2025', url: 'https://www.zijpadel.cz/babolat-counter-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/821-4_babolat-counter-origin-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c705d5' } },
-        { age: 'Senior (60+)', sex: 'Žena', level: 'Začátečník', preference: 'Sílu', product: { name: 'Babolat Air Origin 2025', url: 'https://www.zijpadel.cz/babolat-air-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/1067-4_zijpadel-babolat-air-origin-raketa-detail-predni.jpg?68c6b1e8' } },
-        { age: 'Senior (60+)', sex: 'Žena', level: 'Začátečník', preference: 'Univerzálnost', product: { name: 'Babolat Air Origin 2025', url: 'https://www.zijpadel.cz/babolat-air-origin-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/1067-4_zijpadel-babolat-air-origin-raketa-detail-predni.jpg?68c6b1e8' } },
-        { age: '', sex: '', level: '', preference: '', product: { name: 'DOPLNIT PRODUKT!', url: '', image: '' } }
-      ];
+      // --- Load JSON ---
+      let RULES = [];
+      let CHILD_PRODUCT = null;
 
+      async function loadRules() {
+        const res = await fetch(RULES_URL, { cache: 'no-store' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const data = await res.json();
+        RULES = Array.isArray(data.rules) ? data.rules : [];
+        CHILD_PRODUCT = data.childProduct || null;
+      }
+
+      try {
+        await loadRules();
+      } catch (err) {
+        console.error('Chyba načítání JSON:', err);
+        showError(
+          'Nepodařilo se načíst pravidla kvízu z <code>' + RULES_URL +
+          '</code>. Zkontroluj, že soubor existuje v repu a má správný JSON.'
+        );
+      }
+
+      // --- UI/State ---
+      const steps = Array.from(root.querySelectorAll('.zp-step'));
+      const progressBar = root.querySelector('.zp-quiz__progressbar > span');
+      const progressLabel = root.querySelector('#zp-progress-label');
+
+      const ORDER = ['age','sex','frequency','level','preference','result'];
+      const RESULT_INDEX = ORDER.indexOf('result');
+
+      const state = {
+        stepIndex: 0,
+        answers: { age:null, sex:null, frequency:null, level:null, preference:null }
+      };
 
       function matchRule(answers) {
         for (const rule of RULES) {
@@ -177,17 +223,18 @@ if (!progressBar) {
       }
 
       function setProgress() {
-        const totalSteps = ORDER.length - 1;
+        const totalSteps = ORDER.length - 1; // bez "result"
         const currentStep = Math.min(state.stepIndex + 1, totalSteps);
         const pct = ((currentStep - 1) / (totalSteps - 1)) * 100;
         if (progressBar) progressBar.style.width = pct + '%';
-        if (progressLabel) progressLabel.textContent = \`Krok \${currentStep} z \${totalSteps}\`;
+        if (progressLabel) progressLabel.textContent = `Krok ${currentStep} z ${totalSteps}`;
       }
 
       function showStep(index) {
         state.stepIndex = index;
         steps.forEach((s,i) => s.classList.toggle('active', i === index));
         setProgress();
+
         const active = steps[index];
         const nextBtn = active.querySelector('[data-action="next"], [data-action="finish"]');
         if (nextBtn) {
@@ -200,40 +247,13 @@ if (!progressBar) {
       function handleOptionClick(stepEl, btn) {
         stepEl.querySelectorAll('.zp-option').forEach(b => b.classList.remove('selected'));
         btn.classList.add('selected');
+
         const value = btn.getAttribute('data-value');
         const key = stepEl.getAttribute('data-step');
         state.answers[key] = value;
+
         const advanceBtn = stepEl.querySelector('[data-action="next"], [data-action="finish"]');
         if (advanceBtn) advanceBtn.disabled = false;
-      }
-
-      function next() {
-        const currentStepKey = ORDER[state.stepIndex];
-        if (currentStepKey === 'age' && state.answers.age === 'Dítě (6–15)') {
-          renderResult(CHILD_PRODUCT);
-          showStep(RESULT_INDEX);
-          return;
-        }
-        const isLastQuestion = state.stepIndex === RESULT_INDEX - 1;
-        if (isLastQuestion) {
-          const product = matchRule(state.answers);
-          renderResult(product);
-          showStep(RESULT_INDEX);
-          return;
-        }
-        showStep(Math.min(state.stepIndex + 1, RESULT_INDEX));
-      }
-
-      function back() { showStep(Math.max(state.stepIndex - 1, 0)); }
-      function finish() { next(); }
-      function restart() {
-        state.stepIndex = 0;
-        state.answers = { age:null, sex:null, frequency:null, level:null, preference:null };
-        root.querySelectorAll('.zp-option').forEach(b => b.classList.remove('selected'));
-        root.querySelectorAll('[data-action="next"], [data-action="finish"]').forEach(btn => btn.disabled = true);
-        const firstBack = steps[0].querySelector('[data-action="back"]'); 
-        if (firstBack) firstBack.disabled = true;
-        showStep(0);
       }
 
       function renderResult(product) {
@@ -242,58 +262,99 @@ if (!progressBar) {
         const imgWrap = root.querySelector('#zp-result-image');
         const cta = root.querySelector('#zp-result-cta');
 
-        titleEl.textContent = product.name || 'DOPLNIT PRODUKT!';
-        subEl.textContent = (product.name && product.name !== 'DOPLNIT PRODUKT!') ? 
-          'Tohle by pro tebe mohla být skvělá volba.' : 
-          'Nemáme přiřazený produkt pro tuto kombinaci.';
+        const safe = product || { name:'DOPLNIT PRODUKT!', url:'', image:'' };
+
+        titleEl.textContent = safe.name || 'DOPLNIT PRODUKT!';
+        subEl.textContent = (safe.name && safe.name !== 'DOPLNIT PRODUKT!')
+          ? 'Tohle by pro tebe mohla být skvělá volba.'
+          : 'Nemáme přiřazený produkt pro tuto kombinaci.';
 
         imgWrap.innerHTML = '';
-        if (product.image) {
-          const img = document.createElement('img'); 
-          img.src = product.image; 
-          img.alt = product.name; 
+        if (safe.image) {
+          const img = document.createElement('img');
+          img.src = safe.image;
+          img.alt = safe.name || '';
           imgWrap.appendChild(img);
         } else {
-          const ph = document.createElement('div'); 
-          ph.className = 'zp-quiz__result-image--placeholder'; 
-          ph.innerHTML = 'Obrázek produktu<br><small>(doplňte v RULES)</small>'; 
+          const ph = document.createElement('div');
+          ph.className = 'zp-quiz__result-image--placeholder';
+          ph.innerHTML = 'Obrázek produktu<br><small>(doplňte v RULES)</small>';
           imgWrap.appendChild(ph);
         }
 
         cta.innerHTML = '';
-        if (product.url) {
-          const a = document.createElement('a'); 
-          a.href = product.url; 
+        if (safe.url) {
+          const a = document.createElement('a');
+          a.href = safe.url;
           a.target = '_self';
           a.innerHTML = '<button class="zp-btn zp-btn--primary">Zobrazit produkt</button>';
           cta.appendChild(a);
         }
       }
 
+      function next() {
+        const currentStepKey = ORDER[state.stepIndex];
+
+        // dítě -> childProduct z JSONu
+        if (currentStepKey === 'age' && state.answers.age === 'Dítě (6–15)') {
+          renderResult(CHILD_PRODUCT || { name:'DOPLNIT PRODUKT!', url:'', image:'' });
+          showStep(RESULT_INDEX);
+          return;
+        }
+
+        const isLastQuestion = state.stepIndex === RESULT_INDEX - 1;
+        if (isLastQuestion) {
+          const product = matchRule(state.answers);
+          renderResult(product);
+          showStep(RESULT_INDEX);
+          return;
+        }
+
+        showStep(Math.min(state.stepIndex + 1, RESULT_INDEX));
+      }
+
+      function back() { showStep(Math.max(state.stepIndex - 1, 0)); }
+      function finish() { next(); }
+
+      function restart() {
+        state.stepIndex = 0;
+        state.answers = { age:null, sex:null, frequency:null, level:null, preference:null };
+
+        root.querySelectorAll('.zp-option').forEach(b => b.classList.remove('selected'));
+        root.querySelectorAll('[data-action="next"], [data-action="finish"]').forEach(btn => btn.disabled = true);
+
+        const firstBack = steps[0].querySelector('[data-action="back"]');
+        if (firstBack) firstBack.disabled = true;
+
+        showStep(0);
+      }
+
+      // Option clicks
       root.querySelectorAll('.zp-step').forEach(stepEl => {
         stepEl.addEventListener('click', (e) => {
-          const btn = e.target.closest('.zp-option'); 
-          if (!btn) return; 
+          const btn = e.target.closest('.zp-option');
+          if (!btn) return;
           handleOptionClick(stepEl, btn);
         });
       });
+
+      // Nav buttons
       root.addEventListener('click', (e) => {
-        const actionBtn = e.target.closest('[data-action]'); 
+        const actionBtn = e.target.closest('[data-action]');
         if (!actionBtn) return;
+
         const action = actionBtn.getAttribute('data-action');
         if (action === 'next') next();
         if (action === 'back') back();
         if (action === 'finish') finish();
         if (action === 'restart') restart();
-        const firstBack = steps[0].querySelector('[data-action="back"]'); 
+
+        const firstBack = steps[0].querySelector('[data-action="back"]');
         if (firstBack) firstBack.disabled = (state.stepIndex === 0);
       });
 
       setProgress();
-    })();
-  `;
-  const s = document.createElement('script');
-  s.textContent = jsCode;
-  document.body.appendChild(s);
-});</script>
-</p>
+    });
+  </script>
+</body>
+</html>
