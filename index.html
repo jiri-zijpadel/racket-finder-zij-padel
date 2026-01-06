@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="cs">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Žij padel – Racket Finder</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root { --zp-navy:#003d79; --zp-lime:#c6e801; --zp-text:#1e1e1e; --zp-muted:#f6f8fb; --zp-border:rgba(0,61,121,.16);}
+<p><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /></p>
+<style><!--
+:root { --zp-navy:#003d79; --zp-lime:#c6e801; --zp-text:#1e1e1e; --zp-muted:#f6f8fb; --zp-border:rgba(0,61,121,.16);}
     #zp-quiz { font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; max-width:880px; margin:0 auto; padding:20px; color:var(--zp-text);}
     .zp-quiz__card { background:#fff; border:1px solid var(--zp-border); border-radius:16px; box-shadow:0 6px 22px rgba(0,0,0,.06); overflow:hidden;}
     .zp-quiz__title { font-size:26px; font-weight:700; color:var(--zp-navy); text-align:center; margin:20px 0 10px;}
@@ -36,123 +30,85 @@
     .zp-quiz__result-image--placeholder { width:100%; height:100%; display:grid; place-items:center; background:linear-gradient(135deg,#f7f9fc,#eef3fb); color:#6a6a6a; font-weight:600; font-size:14px; text-align:center; padding:16px; }
     .zp-result__title { font-size:24px; color:var(--zp-navy); margin:6px 0 6px; }
     .zp-helper { font-size:12px; color:#6a6a6a; margin-top:8px; }
-  </style>
-</head>
-<body>
-  <div id="zp-quiz" class="zp-quiz__card">
-    <div class="zp-quiz__header">
-      <h2 class="zp-quiz__title">Vyhledávač padelovových raket</h2>
-      <p class="zp-quiz__subtitle">Najdeme ti ideální padelovou raketu během pár kliknutí.</p>
-      <div class="zp-quiz__progress">
-        <div class="zp-quiz__progressbar"><span style="width:0%"></span></div>
-        <div class="zp-quiz__progress-label"><span id="zp-progress-label">Krok 1 z 5</span></div>
-      </div>
-    </div>
-    <div class="zp-quiz__body">
-      <section class="zp-step active" data-step="age" aria-label="Věk">
-        <h3>Kolik je ti let?</h3>
-        <div class="zp-options" role="group" aria-label="Věkové rozmezí">
-          <button class="zp-option" data-value="Dítě (6–15)"><span class="zp-option__label">Dítě (6–15)</span><span class="zp-option__dot"></span></button>
-          <button class="zp-option" data-value="Dospělý (16–59)"><span class="zp-option__label">Dospělý (16–59)</span><span class="zp-option__dot"></span></button>
-          <button class="zp-option" data-value="Senior (60+)"><span class="zp-option__label">Senior (60+)</span><span class="zp-option__dot"></span></button>
-        </div>
-        <div class="zp-quiz__nav">
-          <button class="zp-btn zp-btn--ghost" data-action="back" disabled>Předchozí</button>
-          <button class="zp-btn zp-btn--primary" data-action="next" disabled>Pokračovat</button>
-        </div>
-      </section>
+--></style>
+<div id="zp-quiz" class="zp-quiz__card">
+<div class="zp-quiz__header">
+<h2 class="zp-quiz__title">Vyhledávač padelovových raket</h2>
+<p class="zp-quiz__subtitle">Najdeme ti ideální padelovou raketu během pár kliknutí.</p>
+<div class="zp-quiz__progress">
+<div class="zp-quiz__progressbar">&nbsp;</div>
+<div class="zp-quiz__progress-label"><span id="zp-progress-label">Krok 1 z 5</span></div>
+</div>
+</div>
+<div class="zp-quiz__body">
+<section class="zp-step active" data-step="age" aria-label="Věk">
+<h3>Kolik je ti let?</h3>
+<div class="zp-options" role="group" aria-label="Věkové rozmezí"><button class="zp-option" data-value="Dítě (6–15)"><span class="zp-option__label">Dítě (6–15)</span><span class="zp-option__dot"></span></button> <button class="zp-option" data-value="Dospělý (16–59)"><span class="zp-option__label">Dospělý (16–59)</span><span class="zp-option__dot"></span></button> <button class="zp-option" data-value="Senior (60+)"><span class="zp-option__label">Senior (60+)</span><span class="zp-option__dot"></span></button></div>
+<div class="zp-quiz__nav"><button class="zp-btn zp-btn--ghost" data-action="back" disabled="disabled">Předchozí</button> <button class="zp-btn zp-btn--primary" data-action="next" disabled="disabled">Pokračovat</button></div>
+</section>
+<section class="zp-step" data-step="sex" aria-label="Pohlaví">
+<h3>Jaké je tvoje pohlaví?</h3>
+<div class="zp-options" role="group" aria-label="Pohlaví"><button class="zp-option" data-value="Muž"><span class="zp-option__label">Muž</span><span class="zp-option__dot"></span></button> <button class="zp-option" data-value="Žena"><span class="zp-option__label">Žena</span><span class="zp-option__dot"></span></button></div>
+<div class="zp-quiz__nav"><button class="zp-btn zp-btn--ghost" data-action="back">Předchozí</button> <button class="zp-btn zp-btn--primary" data-action="next" disabled="disabled">Pokračovat</button></div>
+</section>
+<section class="zp-step" data-step="frequency" aria-label="Frekvence hraní">
+<h3>Jak často hraješ?</h3>
+<div class="zp-options" role="group"><button class="zp-option" data-value="1–2× měsíčně"><span class="zp-option__label">1–2× měsíčně</span><span class="zp-option__dot"></span></button> <button class="zp-option" data-value="1× týdně"><span class="zp-option__label">1× týdně</span><span class="zp-option__dot"></span></button> <button class="zp-option" data-value="2–3× týdně"><span class="zp-option__label">2–3× týdně</span><span class="zp-option__dot"></span></button></div>
+<div class="zp-quiz__nav"><button class="zp-btn zp-btn--ghost" data-action="back">Předchozí</button> <button class="zp-btn zp-btn--primary" data-action="next" disabled="disabled">Pokračovat</button></div>
+</section>
+<section class="zp-step" data-step="level" aria-label="Úroveň hráče">
+<h3>Jaká je tvoje úroveň?</h3>
+<div class="zp-options" role="group"><button class="zp-option" data-value="Začátečník"><span class="zp-option__label">Začátečník</span><span class="zp-option__dot"></span></button> <button class="zp-option" data-value="Pokročilý"><span class="zp-option__label">Pokročilý</span><span class="zp-option__dot"></span></button> <button class="zp-option" data-value="Velmi zdatný hráč / expert"><span class="zp-option__label">Pokročilý až expert</span><span class="zp-option__dot"></span></button></div>
+<div class="zp-quiz__nav"><button class="zp-btn zp-btn--ghost" data-action="back">Předchozí</button> <button class="zp-btn zp-btn--primary" data-action="next" disabled="disabled">Pokračovat</button></div>
+</section>
+<section class="zp-step" data-step="preference" aria-label="Preferovaný styl">
+<h3>Co preferuješ?</h3>
+<div class="zp-options" role="group"><button class="zp-option" data-value="Kontrolu"><span class="zp-option__label">Kontrolu</span><span class="zp-option__dot"></span></button> <button class="zp-option" data-value="Univerzálnost"><span class="zp-option__label">Univerzálnost</span><span class="zp-option__dot"></span></button> <button class="zp-option" data-value="Sílu"><span class="zp-option__label">Sílu</span><span class="zp-option__dot"></span></button></div>
+<div class="zp-quiz__nav"><button class="zp-btn zp-btn--ghost" data-action="back">Předchozí</button> <button class="zp-btn zp-btn--primary" data-action="finish" disabled="disabled">Zobrazit doporučení</button></div>
+</section>
+<section class="zp-step" data-step="result" aria-label="Doporučení" tabindex="-1">
+<div class="zp-result">
+<div class="zp-quiz__result-media">
+<div class="zp-quiz__result-image" id="zp-result-image">
+<div class="zp-quiz__result-image--placeholder">Obrázek produktu<br /><small>(doplňte v RULES)</small></div>
+</div>
+<div><span class="zp-helper">Doporučení</span>
+<h3 class="zp-result__title" id="zp-result-title">—</h3>
+<p class="zp-helper" id="zp-result-subtitle">—</p>
+<div id="zp-result-desc">Na základě tvých odpovědí jsme vybrali raketu, která by ti měla sedět.</div>
+<div class="zp-quiz__nav" style="justify-content: center; margin-top: 12px;"><button class="zp-btn zp-btn--ghost" data-action="restart">Začít znovu</button> <span id="zp-result-cta"></span></div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+<p>
+<script>document.addEventListener("DOMContentLoaded", function() {
+  const jsCode = `
+    (function() {
+      const root = document.getElementById('zp-quiz');
+      if (!root) return;
 
-      <section class="zp-step" data-step="sex" aria-label="Pohlaví">
-        <h3>Jaké je tvoje pohlaví?</h3>
-        <div class="zp-options" role="group" aria-label="Pohlaví">
-          <button class="zp-option" data-value="Muž"><span class="zp-option__label">Muž</span><span class="zp-option__dot"></span></button>
-          <button class="zp-option" data-value="Žena"><span class="zp-option__label">Žena</span><span class="zp-option__dot"></span></button>
-        </div>
-        <div class="zp-quiz__nav">
-          <button class="zp-btn zp-btn--ghost" data-action="back">Předchozí</button>
-          <button class="zp-btn zp-btn--primary" data-action="next" disabled>Pokračovat</button>
-        </div>
-      </section>
+      const steps = Array.from(root.querySelectorAll('.zp-step'));
+      let progressBarWrapper = root.querySelector('.zp-quiz__progressbar');
+let progressBar = root.querySelector('.zp-quiz__progressbar > span');
+if (!progressBar) {
+  progressBar = document.createElement('span');
+  progressBarWrapper.innerHTML = ''; // vymaž &nbsp;
+  progressBarWrapper.appendChild(progressBar);
+}
+      const progressLabel = root.querySelector('#zp-progress-label');
+      const ORDER = ['age','sex','frequency','level','preference','result'];
+      const RESULT_INDEX = ORDER.indexOf('result');
+      const state = { stepIndex: 0, answers: { age:null, sex:null, frequency:null, level:null, preference:null } };
 
-      <section class="zp-step" data-step="frequency" aria-label="Frekvence hraní">
-        <h3>Jak často hraješ?</h3>
-        <div class="zp-options" role="group">
-          <button class="zp-option" data-value="1–2× měsíčně"><span class="zp-option__label">1–2× měsíčně</span><span class="zp-option__dot"></span></button>
-          <button class="zp-option" data-value="1× týdně"><span class="zp-option__label">1× týdně</span><span class="zp-option__dot"></span></button>
-          <button class="zp-option" data-value="2–3× týdně"><span class="zp-option__label">2–3× týdně</span><span class="zp-option__dot"></span></button>
-        </div>
-        <div class="zp-quiz__nav">
-          <button class="zp-btn zp-btn--ghost" data-action="back">Předchozí</button>
-          <button class="zp-btn zp-btn--primary" data-action="next" disabled>Pokračovat</button>
-        </div>
-      </section>
+      const CHILD_PRODUCT = {
+        name: 'Babolat Alioth Junior',
+        url: 'https://www.zijpadel.cz/babolat-alioth-junior/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder',
+        image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/1142-3_zijpadel-babolat-alioth-jr-2026-hlavni-jpeg.jpg?68ea322b'
+      };
 
-      <section class="zp-step" data-step="level" aria-label="Úroveň hráče">
-        <h3>Jaká je tvoje úroveň?</h3>
-        <div class="zp-options" role="group">
-          <button class="zp-option" data-value="Začátečník"><span class="zp-option__label">Začátečník</span><span class="zp-option__dot"></span></button>
-          <button class="zp-option" data-value="Pokročilý"><span class="zp-option__label">Pokročilý</span><span class="zp-option__dot"></span></button>
-          <button class="zp-option" data-value="Velmi zdatný hráč / expert"><span class="zp-option__label">Pokročilý až expert</span><span class="zp-option__dot"></span></button>
-        </div>
-        <div class="zp-quiz__nav">
-          <button class="zp-btn zp-btn--ghost" data-action="back">Předchozí</button>
-          <button class="zp-btn zp-btn--primary" data-action="next" disabled>Pokračovat</button>
-        </div>
-      </section>
-
-      <section class="zp-step" data-step="preference" aria-label="Preferovaný styl">
-        <h3>Co preferuješ?</h3>
-        <div class="zp-options" role="group">
-          <button class="zp-option" data-value="Kontrolu"><span class="zp-option__label">Kontrolu</span><span class="zp-option__dot"></span></button>
-          <button class="zp-option" data-value="Univerzálnost"><span class="zp-option__label">Univerzálnost</span><span class="zp-option__dot"></span></button>
-          <button class="zp-option" data-value="Sílu"><span class="zp-option__label">Sílu</span><span class="zp-option__dot"></span></button>
-        </div>
-        <div class="zp-quiz__nav">
-          <button class="zp-btn zp-btn--ghost" data-action="back">Předchozí</button>
-          <button class="zp-btn zp-btn--primary" data-action="finish" disabled>Zobrazit doporučení</button>
-        </div>
-      </section>
-
-      <section class="zp-step" data-step="result" aria-label="Doporučení" tabindex="-1">
-        <div class="zp-result">
-          
-          <div class="zp-quiz__result-media">
-            <div class="zp-quiz__result-image" id="zp-result-image">
-              <div class="zp-quiz__result-image--placeholder">Obrázek produktu<br><small>(doplňte v RULES)</small></div>
-            </div>
-            <div>
-              <span class="zp-helper">Doporučení</span>
-          <h3 class="zp-result__title" id="zp-result-title">—</h3>
-          <p class="zp-helper" id="zp-result-subtitle">—</p>
-              <div id="zp-result-desc">Na základě tvých odpovědí jsme vybrali raketu, která by ti měla sedět.</div>
-              <div class="zp-quiz__nav" style="justify-content:center; margin-top:12px;">
-                <button class="zp-btn zp-btn--ghost" data-action="restart">Začít znovu</button>
-                <span id="zp-result-cta"></span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  </div>
-<script>
-(function() {
-  const root = document.getElementById('zp-quiz');
-  const steps = Array.from(root.querySelectorAll('.zp-step'));
-  const progressBar = root.querySelector('.zp-quiz__progressbar > span');
-  const progressLabel = root.querySelector('#zp-progress-label');
-  const ORDER = ['age','sex','frequency','level','preference','result'];
-  const RESULT_INDEX = ORDER.indexOf('result');
-  const state = { stepIndex: 0, answers: { age:null, sex:null, frequency:null, level:null, preference:null } };
-
-  // ✅ Speciální produkt pro děti
-  const CHILD_PRODUCT = {
-    name: 'Babolat Alioth Junior',
-    url: 'https://www.zijpadel.cz/babolat-alioth-junior/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder',
-    image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/1142-3_zijpadel-babolat-alioth-jr-2026-hlavni-jpeg.jpg?68ea322b'
-  };
-
-  // ✅ Pravidla pro ostatní kombinace (výběr zkrácen pro přehlednost)
   const RULES = [
         { age: 'Dospělý (16–59)', sex: 'Muž', level: 'Pokročilý', preference: 'Kontrolu', product: { name: 'Babolat Counter Veron 2025', url: 'https://www.zijpadel.cz/babolat-counter-veron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/824-4_babolat-counter-veron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68c70725' } },
         { age: 'Dospělý (16–59)', sex: 'Muž', level: 'Pokročilý', preference: 'Sílu', product: { name: 'Babolat Technical Veron Juan Lebron 2025', url: 'https://www.zijpadel.cz/babolat-technical-veron-juan-lebron-2025/?utm_source=racket_finder&utm_medium=racket_finder&utm_campaign=prodej_podpora&utm_content=racket_finder', image: 'https://cdn.myshoptet.com/usr/www.zijpadel.cz/user/shop/big/839-5_babolat-technical-veron-juan-lebron-2025-padelova-raketa-pohled-zepredu-zijpadel-webp.jpg?68cbd789' } },
@@ -211,151 +167,133 @@
         { age: '', sex: '', level: '', preference: '', product: { name: 'DOPLNIT PRODUKT!', url: '', image: '' } }
       ];
 
-  // 🧩 Najdi produkt podle kombinace odpovědí
-  function matchRule(answers) {
-    for (const rule of RULES) {
-      const ok = ['age','sex','level','preference'].every(key => rule[key] === answers[key]);
-      if (ok) return rule.product;
-    }
-    return { name: 'DOPLNIT PRODUKT!', url: '', image: '' };
-  }
 
-  function setProgress() {
-    const totalSteps = ORDER.length - 1;
-    const currentStep = Math.min(state.stepIndex + 1, totalSteps);
-    const pct = (currentStep - 1) / (totalSteps - 1) * 100;
-    progressBar.style.width = pct + '%';
-    progressLabel.textContent = `Krok ${currentStep} z ${totalSteps}`;
-  }
+      function matchRule(answers) {
+        for (const rule of RULES) {
+          const ok = ['age','sex','level','preference'].every(key => rule[key] === answers[key]);
+          if (ok) return rule.product;
+        }
+        return { name: 'DOPLNIT PRODUKT!', url: '', image: '' };
+      }
 
-  function showStep(index) {
-    state.stepIndex = index;
-    steps.forEach((s,i) => s.classList.toggle('active', i === index));
-    setProgress();
-    const active = steps[index];
-    const nextBtn = active.querySelector('[data-action="next"], [data-action="finish"]');
-    if (nextBtn) {
-      const stepKey = active.getAttribute('data-step');
-      const val = state.answers[stepKey];
-      nextBtn.disabled = !val;
-    }
-  }
+      function setProgress() {
+        const totalSteps = ORDER.length - 1;
+        const currentStep = Math.min(state.stepIndex + 1, totalSteps);
+        const pct = ((currentStep - 1) / (totalSteps - 1)) * 100;
+        if (progressBar) progressBar.style.width = pct + '%';
+        if (progressLabel) progressLabel.textContent = \`Krok \${currentStep} z \${totalSteps}\`;
+      }
 
-  function handleOptionClick(stepEl, btn) {
-    stepEl.querySelectorAll('.zp-option').forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
-    const value = btn.getAttribute('data-value');
-    const key = stepEl.getAttribute('data-step');
-    state.answers[key] = value;
-    const advanceBtn = stepEl.querySelector('[data-action="next"], [data-action="finish"]');
-    if (advanceBtn) advanceBtn.disabled = false;
-  }
+      function showStep(index) {
+        state.stepIndex = index;
+        steps.forEach((s,i) => s.classList.toggle('active', i === index));
+        setProgress();
+        const active = steps[index];
+        const nextBtn = active.querySelector('[data-action="next"], [data-action="finish"]');
+        if (nextBtn) {
+          const stepKey = active.getAttribute('data-step');
+          const val = state.answers[stepKey];
+          nextBtn.disabled = !val;
+        }
+      }
 
-  function next() {
-    const currentStepKey = ORDER[state.stepIndex];
+      function handleOptionClick(stepEl, btn) {
+        stepEl.querySelectorAll('.zp-option').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        const value = btn.getAttribute('data-value');
+        const key = stepEl.getAttribute('data-step');
+        state.answers[key] = value;
+        const advanceBtn = stepEl.querySelector('[data-action="next"], [data-action="finish"]');
+        if (advanceBtn) advanceBtn.disabled = false;
+      }
 
-    // 🧒 speciální logika pro děti
-    if (currentStepKey === 'age' && state.answers.age === 'Dítě (6–15)') {
-      renderResult(CHILD_PRODUCT);
-      showStep(RESULT_INDEX);
-      return;
-    }
+      function next() {
+        const currentStepKey = ORDER[state.stepIndex];
+        if (currentStepKey === 'age' && state.answers.age === 'Dítě (6–15)') {
+          renderResult(CHILD_PRODUCT);
+          showStep(RESULT_INDEX);
+          return;
+        }
+        const isLastQuestion = state.stepIndex === RESULT_INDEX - 1;
+        if (isLastQuestion) {
+          const product = matchRule(state.answers);
+          renderResult(product);
+          showStep(RESULT_INDEX);
+          return;
+        }
+        showStep(Math.min(state.stepIndex + 1, RESULT_INDEX));
+      }
 
-    const isLastQuestion = state.stepIndex === RESULT_INDEX - 1;
-    if (isLastQuestion) {
-      const product = matchRule(state.answers);
-      renderResult(product);
-      showStep(RESULT_INDEX);
-      return;
-    }
-    showStep(Math.min(state.stepIndex + 1, RESULT_INDEX));
-  }
+      function back() { showStep(Math.max(state.stepIndex - 1, 0)); }
+      function finish() { next(); }
+      function restart() {
+        state.stepIndex = 0;
+        state.answers = { age:null, sex:null, frequency:null, level:null, preference:null };
+        root.querySelectorAll('.zp-option').forEach(b => b.classList.remove('selected'));
+        root.querySelectorAll('[data-action="next"], [data-action="finish"]').forEach(btn => btn.disabled = true);
+        const firstBack = steps[0].querySelector('[data-action="back"]'); 
+        if (firstBack) firstBack.disabled = true;
+        showStep(0);
+      }
 
-  function back() { showStep(Math.max(state.stepIndex - 1, 0)); }
-  function finish() { next(); }
-  function restart() {
-    state.stepIndex = 0;
-    state.answers = { age:null, sex:null, frequency:null, level:null, preference:null };
-    root.querySelectorAll('.zp-option').forEach(b => b.classList.remove('selected'));
-    root.querySelectorAll('[data-action="next"], [data-action="finish"]').forEach(btn => btn.disabled = true);
-    const firstBack = steps[0].querySelector('[data-action="back"]'); 
-    if (firstBack) firstBack.disabled = true;
-    showStep(0);
-  }
+      function renderResult(product) {
+        const titleEl = root.querySelector('#zp-result-title');
+        const subEl = root.querySelector('#zp-result-subtitle');
+        const imgWrap = root.querySelector('#zp-result-image');
+        const cta = root.querySelector('#zp-result-cta');
 
-  function renderResult(product) {
-    const titleEl = root.querySelector('#zp-result-title');
-    const subEl = root.querySelector('#zp-result-subtitle');
-    const imgWrap = root.querySelector('#zp-result-image');
-    const cta = root.querySelector('#zp-result-cta');
+        titleEl.textContent = product.name || 'DOPLNIT PRODUKT!';
+        subEl.textContent = (product.name && product.name !== 'DOPLNIT PRODUKT!') ? 
+          'Tohle by pro tebe mohla být skvělá volba.' : 
+          'Nemáme přiřazený produkt pro tuto kombinaci.';
 
-    titleEl.textContent = product.name || 'DOPLNIT PRODUKT!';
-    subEl.textContent = (product.name && product.name !== 'DOPLNIT PRODUKT!') ? 
-      'Tohle by pro tebe mohla být skvělá volba.' : 
-      'Nemáme přiřazený produkt pro tuto kombinaci.';
+        imgWrap.innerHTML = '';
+        if (product.image) {
+          const img = document.createElement('img'); 
+          img.src = product.image; 
+          img.alt = product.name; 
+          imgWrap.appendChild(img);
+        } else {
+          const ph = document.createElement('div'); 
+          ph.className = 'zp-quiz__result-image--placeholder'; 
+          ph.innerHTML = 'Obrázek produktu<br><small>(doplňte v RULES)</small>'; 
+          imgWrap.appendChild(ph);
+        }
 
-    imgWrap.innerHTML = '';
-    if (product.image) {
-      const img = document.createElement('img'); 
-      img.src = product.image; 
-      img.alt = product.name; 
-      imgWrap.appendChild(img);
-    } else {
-      const ph = document.createElement('div'); 
-      ph.className = 'zp-quiz__result-image--placeholder'; 
-      ph.innerHTML = 'Obrázek produktu<br><small>(doplňte v RULES)</small>'; 
-      imgWrap.appendChild(ph);
-    }
+        cta.innerHTML = '';
+        if (product.url) {
+          const a = document.createElement('a'); 
+          a.href = product.url; 
+          a.target = '_self';
+          a.innerHTML = '<button class="zp-btn zp-btn--primary">Zobrazit produkt</button>';
+          cta.appendChild(a);
+        }
+      }
 
-    cta.innerHTML = '';
-    if (product.url) {
-      const a = document.createElement('a'); 
-      a.href = product.url; 
-      a.target = '_self';
-      a.innerHTML = '<button class="zp-btn zp-btn--primary">Zobrazit produkt</button>';
-      cta.appendChild(a);
-    }
-  }
-
-  // Eventy
-  root.querySelectorAll('.zp-step').forEach(stepEl => {
-    stepEl.addEventListener('click', (e) => {
-      const btn = e.target.closest('.zp-option'); 
-      if (!btn) return; 
-      handleOptionClick(stepEl, btn);
-    });
-  });
-  root.addEventListener('click', (e) => {
-    const actionBtn = e.target.closest('[data-action]'); 
-    if (!actionBtn) return;
-    const action = actionBtn.getAttribute('data-action');
-    if (action === 'next') next();
-    if (action === 'back') back();
-    if (action === 'finish') finish();
-    if (action === 'restart') restart();
-    const firstBack = steps[0].querySelector('[data-action="back"]'); 
-    if (firstBack) firstBack.disabled = (state.stepIndex === 0);
-  });
-  document.addEventListener('DOMContentLoaded', function() {
-    // Funkce pro skrytí elementů na základě textu
-    function hideTextElement(selector, textToFind) {
-        const elements = document.querySelectorAll(selector);
-        elements.forEach(el => {
-            // Kontrola, zda text elementu obsahuje hledaný řetězec
-            if (el.textContent.trim().includes(textToFind.trim())) {
-                el.style.display = 'none';
-            }
+      root.querySelectorAll('.zp-step').forEach(stepEl => {
+        stepEl.addEventListener('click', (e) => {
+          const btn = e.target.closest('.zp-option'); 
+          if (!btn) return; 
+          handleOptionClick(stepEl, btn);
         });
-    }
+      });
+      root.addEventListener('click', (e) => {
+        const actionBtn = e.target.closest('[data-action]'); 
+        if (!actionBtn) return;
+        const action = actionBtn.getAttribute('data-action');
+        if (action === 'next') next();
+        if (action === 'back') back();
+        if (action === 'finish') finish();
+        if (action === 'restart') restart();
+        const firstBack = steps[0].querySelector('[data-action="back"]'); 
+        if (firstBack) firstBack.disabled = (state.stepIndex === 0);
+      });
 
-    // 1. Skrytí nadpisu H1 "Pojďme vybrat tvojí novou raketu"
-    hideTextElement('h1', 'Pojďme vybrat tvojí novou raketu');
-
-    // 2. Skrytí odstavce P "Žij padel – Racket Finder"
-    hideTextElement('p', 'Žij padel – Racket Finder');
-});
-  setProgress();
-})();
-</script>
-</body>
-</html>
+      setProgress();
+    })();
+  `;
+  const s = document.createElement('script');
+  s.textContent = jsCode;
+  document.body.appendChild(s);
+});</script>
+</p>
