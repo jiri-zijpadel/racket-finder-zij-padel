@@ -28,7 +28,7 @@
       border-radius:10px; border:1px solid var(--border); outline:none;
       font-size:13px; background:#fff;
     }
-    textarea{ min-height:120px; font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace; font-size:12px; }
+    textarea{ min-height:140px; font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace; font-size:12px; }
     .cols{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
     @media (max-width:900px){ .cols{ grid-template-columns:1fr; } }
     .hint{ color:#6b7280; font-size:12px; margin-top:6px; }
@@ -36,15 +36,37 @@
     .err{ color:#991b1b; background:rgba(220,38,38,.08); border:1px solid rgba(220,38,38,.25); padding:10px 12px; border-radius:12px; font-size:13px; font-weight:800;}
     table{ width:100%; border-collapse:separate; border-spacing:0; }
     th, td{ padding:10px; border-bottom:1px solid var(--border); vertical-align:top; font-size:13px; }
-    th{ text-align:left; color:var(--navy); font-size:12px; letter-spacing:.02em; text-transform:uppercase; background:var(--muted); position:sticky; top:74px; z-index:5; }
+    th{ text-align:left; color:var(--navy); font-size:12px; letter-spacing:.02em; text-transform:uppercase; background:var(--muted); position:sticky; top:84px; z-index:5; }
     .table-wrap{ overflow:auto; max-height:65vh; border:1px solid var(--border); border-radius:14px; }
     .mini{ font-size:11px; color:#6b7280; }
     .actions{ display:flex; gap:8px; }
-    .link{ color:var(--navy); font-weight:800; text-decoration:none; }
-    .link:hover{ text-decoration:underline; }
-    .search{ flex:1 1 260px; min-width:220px; }
     .right{ margin-left:auto; display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
     .kbd{ font-family:ui-monospace,Menlo,monospace; font-size:11px; padding:3px 7px; border-radius:8px; background:#fff; border:1px solid var(--border); color:#374151; }
+    .dup-row{ background: rgba(245,158,11,.10); }
+    .dup-badge{
+      display:inline-flex; align-items:center; gap:6px;
+      font-size:11px; font-weight:900; color:#92400e;
+      border:1px solid rgba(245,158,11,.30);
+      background: rgba(245,158,11,.12);
+      padding:4px 8px; border-radius:999px;
+      margin-left:8px;
+    }
+    .dropzone{
+      border:2px dashed rgba(0,61,121,.25);
+      background:rgba(0,61,121,.04);
+      border-radius:14px;
+      padding:12px 14px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+    }
+    .dropzone.dragover{
+      border-color: rgba(198,232,1,.9);
+      background: rgba(198,232,1,.12);
+    }
+    .inline{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+    .tag{ font-size:12px; font-weight:900; padding:6px 10px; border-radius:999px; border:1px solid var(--border); background:#fff; color:var(--navy); }
   </style>
 </head>
 
@@ -55,7 +77,7 @@
       <div>
         <h1>Rules editor – Žij padel</h1>
         <div class="sub">
-          Načítá <span class="kbd">./data/zp-racket-rules.json</span> a umí exportovat nový JSON. Pro „uložení“ do GitHubu stáhni soubor a commitni ho do <span class="kbd">/data</span>.
+          Načítá <span class="kbd">./data/zp-racket-rules.json</span>. Pro „uložení“ do GitHubu klikni <b>Download JSON</b> a commitni soubor do <span class="kbd">/data</span>.
         </div>
       </div>
       <div class="right">
@@ -67,16 +89,41 @@
     </div>
 
     <div class="row">
-      <input id="search" class="search" placeholder="Hledat v pravidlech… (age/sex/level/preference/name/url)" />
+      <input id="search" class="search" style="flex:1 1 260px; min-width:220px;"
+             placeholder="Hledat v pravidlech… (age/sex/level/preference/name/url)" />
       <button class="btn btn-primary" id="btnAdd">+ Přidat pravidlo</button>
       <button class="btn btn-ghost" id="btnSort">Seřadit A→Z</button>
+      <button class="btn btn-ghost" id="btnShowDup">Zobrazit duplicity</button>
       <button class="btn btn-danger" id="btnDeleteFiltered">Smazat filtrované</button>
-      <span class="mini">Tip: pro rychlou úpravu klikni do buňky.</span>
+      <span class="mini">Tip: dropdowny zabraňují překlepům.</span>
     </div>
   </div>
 </header>
 
 <div class="grid wrap">
+
+  <div class="card">
+    <div class="card-h">
+      <h2>Import / Drop JSON</h2>
+      <span class="mini">Můžeš přetáhnout soubor JSON sem, nebo použít Import. Import přepíše aktuální data v editoru.</span>
+    </div>
+    <div class="card-b">
+      <div id="dropzone" class="dropzone">
+        <div>
+          <div class="inline">
+            <span class="tag">Drag & drop</span>
+            <span class="mini">přetáhni sem <b>zp-racket-rules.json</b></span>
+          </div>
+          <div class="hint">Po importu doporučuju kliknout na <b>Download JSON</b> a commit do <code>/data</code>.</div>
+        </div>
+        <div class="inline">
+          <input id="fileInput" type="file" accept="application/json,.json" style="display:none;" />
+          <button class="btn btn-ghost" id="btnImport">Import JSON</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="card">
     <div class="card-h">
       <h2>Child product (Dítě 6–15)</h2>
@@ -103,26 +150,31 @@
 
   <div class="card">
     <div class="card-h">
-      <h2>Rules</h2>
+      <div class="inline" style="gap:8px;">
+        <h2 style="margin:0;">Rules</h2>
+        <span id="dupSummary" class="mini"></span>
+      </div>
       <div class="row" style="margin:0;">
         <span class="pill" id="countAll">—</span>
         <span class="pill" id="countShown">—</span>
       </div>
     </div>
+
     <div class="card-b">
       <div id="msg"></div>
+
       <div class="table-wrap">
         <table id="rulesTable">
           <thead>
             <tr>
               <th style="min-width:170px;">Age</th>
-              <th style="min-width:90px;">Sex</th>
-              <th style="min-width:210px;">Level</th>
-              <th style="min-width:160px;">Preference</th>
+              <th style="min-width:110px;">Sex</th>
+              <th style="min-width:230px;">Level</th>
+              <th style="min-width:180px;">Preference</th>
               <th style="min-width:260px;">Product</th>
               <th style="min-width:260px;">URL</th>
               <th style="min-width:260px;">Image</th>
-              <th style="min-width:120px;">Akce</th>
+              <th style="min-width:140px;">Akce</th>
             </tr>
           </thead>
           <tbody id="rulesBody"></tbody>
@@ -132,7 +184,7 @@
       <div style="margin-top:14px;">
         <label>Aktuální JSON (read-only preview)</label>
         <textarea id="jsonPreview" readonly></textarea>
-        <div class="hint">Preview se aktualizuje automaticky při editaci.</div>
+        <div class="hint">Preview se aktualizuje automaticky při editaci. Duplicity jsou zvýrazněné oranžově.</div>
       </div>
     </div>
   </div>
@@ -140,13 +192,23 @@
 
 <script>
   const RULES_URL = './data/zp-racket-rules.json';
-
   const $ = (id) => document.getElementById(id);
+
+  // canonical option sets (dropdowns)
+  const OPT = {
+    age: ['Dítě (6–15)', 'Dospělý (16–59)', 'Senior (60+)'],
+    sex: ['Muž', 'Žena'],
+    // IMPORTANT: keep exactly as used in your quiz values
+    level: ['Začátečník', 'Pokročilý', 'Velmi zdatný hráč / expert'],
+    preference: ['Kontrolu', 'Univerzálnost', 'Sílu']
+  };
 
   const state = {
     data: { childProduct: { name:'', url:'', image:'' }, rules: [] },
     filteredIdx: [],
     sortAZ: false,
+    showDupOnly: false,
+    dupMap: new Map(), // key -> [indexes]
   };
 
   function setMsg(html, kind) {
@@ -156,9 +218,17 @@
   }
 
   function setPill(text) { $('statusPill').textContent = text; }
-
   function normalize(s){ return (s ?? '').toString().trim(); }
   function includes(hay, needle){ return hay.toLowerCase().includes(needle.toLowerCase()); }
+
+  function escapeHtml(s){
+    return String(s ?? '')
+      .replaceAll('&','&amp;')
+      .replaceAll('<','&lt;')
+      .replaceAll('>','&gt;')
+      .replaceAll('"','&quot;')
+      .replaceAll("'","&#039;");
+  }
 
   function buildJSON() {
     const cp = {
@@ -166,7 +236,6 @@
       url: normalize($('cpUrl').value),
       image: normalize($('cpImage').value),
     };
-    // rules already in state.data.rules
     return { childProduct: cp, rules: state.data.rules };
   }
 
@@ -176,6 +245,71 @@
     $('countAll').textContent = `Všechna pravidla: ${state.data.rules.length}`;
     $('countShown').textContent = `Zobrazeno: ${state.filteredIdx.length}`;
     setPill(`Loaded • ${state.data.rules.length} rules`);
+    updateDupState(); // keep dup counts fresh
+  }
+
+  // ---- Duplicate detection ----
+  function ruleKey(r){
+    // duplicates should be by answer combination (age+sex+level+preference)
+    return `${normalize(r.age)}|${normalize(r.sex)}|${normalize(r.level)}|${normalize(r.preference)}`.toLowerCase();
+  }
+
+  function computeDupMap(){
+    const map = new Map();
+    const rules = state.data.rules;
+    for (let i=0; i<rules.length; i++){
+      const r = rules[i];
+      const k = ruleKey(r);
+      if (!map.has(k)) map.set(k, []);
+      map.get(k).push(i);
+    }
+    state.dupMap = map;
+  }
+
+  function getDupIndexesSet(){
+    const set = new Set();
+    for (const [k, arr] of state.dupMap.entries()){
+      if (arr.length > 1){
+        for (const i of arr) set.add(i);
+      }
+    }
+    return set;
+  }
+
+  function updateDupState(){
+    computeDupMap();
+    const dupKeys = [...state.dupMap.values()].filter(a => a.length > 1).length;
+    const dupRows = [...state.dupMap.values()].reduce((acc,a)=>acc+(a.length>1?a.length:0),0);
+
+    const summary = dupKeys
+      ? `⚠️ Duplicity: ${dupKeys} kombinací / ${dupRows} řádků`
+      : `✅ Bez duplicit`;
+    $('dupSummary').textContent = summary;
+  }
+
+  // ---- Rendering helpers ----
+  function optionSelectHTML(kind, i, value){
+    const options = OPT[kind] || [];
+    const v = normalize(value);
+    // If value is not in canonical list (legacy/typo), keep it as first "custom" option.
+    const inList = options.includes(v);
+    let html = `<select data-i="${i}" data-k="${kind}">`;
+    if (!inList && v) {
+      html += `<option value="${escapeHtml(v)}">${escapeHtml(v)} (custom)</option>`;
+    } else {
+      // allow empty state
+      html += `<option value="">—</option>`;
+    }
+    for (const o of options){
+      const sel = (o === v) ? 'selected' : '';
+      html += `<option ${sel} value="${escapeHtml(o)}">${escapeHtml(o)}</option>`;
+    }
+    if (!v) {
+      // keep empty selected if no value
+      html = html.replace('value="">—</option>', 'value="" selected>—</option>');
+    }
+    html += `</select>`;
+    return html;
   }
 
   function renderTable() {
@@ -185,8 +319,17 @@
     const q = normalize($('search').value);
     const rules = state.data.rules;
 
-    // filter indexes
+    // filter base indexes
     let idx = rules.map((_, i) => i);
+
+    // apply duplicate-only filter
+    computeDupMap();
+    const dupSet = getDupIndexesSet();
+    if (state.showDupOnly) {
+      idx = idx.filter(i => dupSet.has(i));
+    }
+
+    // apply search
     if (q) {
       idx = idx.filter(i => {
         const r = rules[i];
@@ -198,7 +341,7 @@
       });
     }
 
-    // sort (optional)
+    // sort
     if (state.sortAZ) {
       idx.sort((a,b) => {
         const ra = rules[a], rb = rules[b];
@@ -210,16 +353,29 @@
 
     state.filteredIdx = idx;
 
+    // dup highlight
+    const dupIndexSet = dupSet;
+
     for (const i of idx) {
       const r = rules[i];
       const p = r.product || (r.product = { name:'', url:'', image:'' });
 
+      const isDup = dupIndexSet.has(i);
       const tr = document.createElement('tr');
+      if (isDup) tr.classList.add('dup-row');
+
+      // count duplicates for badge
+      const k = ruleKey(r);
+      const count = (state.dupMap.get(k) || []).length;
+
       tr.innerHTML = `
-        <td><input data-i="${i}" data-k="age" value="${escapeHtml(r.age||'')}" /></td>
-        <td><input data-i="${i}" data-k="sex" value="${escapeHtml(r.sex||'')}" /></td>
-        <td><input data-i="${i}" data-k="level" value="${escapeHtml(r.level||'')}" /></td>
-        <td><input data-i="${i}" data-k="preference" value="${escapeHtml(r.preference||'')}" /></td>
+        <td>
+          ${optionSelectHTML('age', i, r.age)}
+          ${isDup ? `<div class="dup-badge">Duplicate ×${count}</div>` : ''}
+        </td>
+        <td>${optionSelectHTML('sex', i, r.sex)}</td>
+        <td>${optionSelectHTML('level', i, r.level)}</td>
+        <td>${optionSelectHTML('preference', i, r.preference)}</td>
 
         <td><input data-i="${i}" data-k="product.name" value="${escapeHtml(p.name||'')}" /></td>
         <td><input data-i="${i}" data-k="product.url" value="${escapeHtml(p.url||'')}" /></td>
@@ -236,15 +392,6 @@
     }
 
     refreshPreview();
-  }
-
-  function escapeHtml(s){
-    return String(s ?? '')
-      .replaceAll('&','&amp;')
-      .replaceAll('<','&lt;')
-      .replaceAll('>','&gt;')
-      .replaceAll('"','&quot;')
-      .replaceAll("'","&#039;");
   }
 
   function updateRule(i, key, value){
@@ -275,7 +422,6 @@
     });
     setMsg('Přidáno nové pravidlo. Nezapomeň <b>Download JSON</b> a commit do <code>/data</code>.', 'ok');
     renderTable();
-    // scroll down a bit to show new row
     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
   }
 
@@ -296,14 +442,64 @@
 
   function deleteFiltered(){
     if (!state.filteredIdx.length) return;
-    // delete from end to start so indexes don't shift
     const idx = [...state.filteredIdx].sort((a,b)=>b-a);
     for (const i of idx) state.data.rules.splice(i, 1);
     setMsg(`Smazáno ${idx.length} pravidel (aktuální filtr).`, 'ok');
     $('search').value = '';
+    state.showDupOnly = false;
     renderTable();
   }
 
+  // ---- Import / Drop ----
+  function validateAndApplyImportedJSON(obj){
+    if (!obj || typeof obj !== 'object') throw new Error('JSON není objekt.');
+    if (!obj.rules || !Array.isArray(obj.rules)) throw new Error('Chybí pole "rules".');
+
+    const child = obj.childProduct || { name:'', url:'', image:'' };
+    const rules = obj.rules;
+
+    // normalize minimal structure
+    const fixedRules = rules.map((r) => ({
+      age: normalize(r.age),
+      sex: normalize(r.sex),
+      level: normalize(r.level),
+      preference: normalize(r.preference),
+      product: {
+        name: normalize(r.product?.name),
+        url: normalize(r.product?.url),
+        image: normalize(r.product?.image),
+      }
+    }));
+
+    state.data = {
+      childProduct: {
+        name: normalize(child.name),
+        url: normalize(child.url),
+        image: normalize(child.image),
+      },
+      rules: fixedRules
+    };
+
+    $('cpName').value = state.data.childProduct.name || '';
+    $('cpUrl').value = state.data.childProduct.url || '';
+    $('cpImage').value = state.data.childProduct.image || '';
+
+    $('search').value = '';
+    state.showDupOnly = false;
+
+    setMsg('JSON importován do editoru. Pro nasazení klikni <b>Download JSON</b> a commitni do <code>/data/zp-racket-rules.json</code>.', 'ok');
+    renderTable();
+  }
+
+  async function importFromFile(file){
+    const text = await file.text();
+    let obj;
+    try { obj = JSON.parse(text); }
+    catch { throw new Error('Neplatný JSON (nelze parse).'); }
+    validateAndApplyImportedJSON(obj);
+  }
+
+  // ---- Load from repo ----
   async function load() {
     setMsg('', '');
     setPill('Loading…');
@@ -312,7 +508,6 @@
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const data = await res.json();
 
-      // normalize
       state.data = {
         childProduct: data.childProduct || { name:'', url:'', image:'' },
         rules: Array.isArray(data.rules) ? data.rules : []
@@ -354,15 +549,28 @@
     }
   }
 
-  // events
+  // ---- Events (table edits) ----
   $('rulesBody').addEventListener('input', (e) => {
     const el = e.target;
-    if (!(el instanceof HTMLInputElement)) return;
-    const i = Number(el.getAttribute('data-i'));
-    const k = el.getAttribute('data-k');
-    if (!Number.isFinite(i) || !k) return;
-    updateRule(i, k, el.value);
-    refreshPreview();
+    if (el instanceof HTMLInputElement) {
+      const i = Number(el.getAttribute('data-i'));
+      const k = el.getAttribute('data-k');
+      if (!Number.isFinite(i) || !k) return;
+      updateRule(i, k, el.value);
+      refreshPreview();
+    }
+  });
+
+  $('rulesBody').addEventListener('change', (e) => {
+    const el = e.target;
+    if (el instanceof HTMLSelectElement) {
+      const i = Number(el.getAttribute('data-i'));
+      const k = el.getAttribute('data-k');
+      if (!Number.isFinite(i) || !k) return;
+      updateRule(i, k, el.value);
+      // re-render to update duplicate highlighting immediately
+      renderTable();
+    }
   });
 
   $('rulesBody').addEventListener('click', (e) => {
@@ -382,10 +590,49 @@
 
   $('btnAdd').addEventListener('click', () => addRule());
   $('btnSort').addEventListener('click', () => { state.sortAZ = !state.sortAZ; renderTable(); });
+
+  $('btnShowDup').addEventListener('click', () => {
+    state.showDupOnly = !state.showDupOnly;
+    $('btnShowDup').textContent = state.showDupOnly ? 'Zobrazit vše' : 'Zobrazit duplicity';
+    renderTable();
+  });
+
   $('btnDeleteFiltered').addEventListener('click', () => deleteFiltered());
   $('btnDownload').addEventListener('click', downloadJSON);
   $('btnCopy').addEventListener('click', copyJSON);
   $('btnReload').addEventListener('click', load);
+
+  // Import UI
+  $('btnImport').addEventListener('click', () => $('fileInput').click());
+  $('fileInput').addEventListener('change', async (e) => {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+    try{
+      await importFromFile(file);
+    }catch(err){
+      console.error(err);
+      setMsg(`Import selhal: ${escapeHtml(err.message || String(err))}`, 'err');
+    }finally{
+      $('fileInput').value = '';
+    }
+  });
+
+  // Drag & Drop
+  const dz = $('dropzone');
+  dz.addEventListener('dragover', (e) => { e.preventDefault(); dz.classList.add('dragover'); });
+  dz.addEventListener('dragleave', () => dz.classList.remove('dragover'));
+  dz.addEventListener('drop', async (e) => {
+    e.preventDefault();
+    dz.classList.remove('dragover');
+    const file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+    if (!file) return;
+    try{
+      await importFromFile(file);
+    }catch(err){
+      console.error(err);
+      setMsg(`Import selhal: ${escapeHtml(err.message || String(err))}`, 'err');
+    }
+  });
 
   // start
   load();
