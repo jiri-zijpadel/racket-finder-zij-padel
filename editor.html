@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Žij padel – Rules editor</title>
+  <style>
+    :root { --navy:#003d79; --lime:#c6e801; --text:#111827; --muted:#f6f8fb; --border:rgba(0,61,121,.18); }
+    body{ margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; color:var(--text); background:#fff;}
+    header{ position:sticky; top:0; background:#fff; border-bottom:1px solid var(--border); z-index:10;}
+    .wrap{ max-width:1200px; margin:0 auto; padding:18px;}
+    h1{ margin:0; font-size:20px; color:var(--navy); }
+    .sub{ margin:6px 0 0; color:#4b5563; font-size:13px;}
+    .row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:12px;}
+    .btn{ border:0; cursor:pointer; padding:10px 12px; border-radius:10px; font-weight:800; font-size:13px; }
+    .btn-primary{ background:var(--lime); color:#0b0b0b; box-shadow:0 6px 16px rgba(198,232,1,.25); }
+    .btn-ghost{ background:#fff; color:var(--navy); border:1px solid var(--border); }
+    .btn-danger{ background:#fff; color:#b91c1c; border:1px solid rgba(185,28,28,.25); }
+    .pill{ font-size:12px; font-weight:800; padding:6px 10px; border-radius:999px; background:var(--muted); border:1px solid var(--border); color:var(--navy); }
+    .grid{ display:grid; grid-template-columns:1fr; gap:14px; padding:18px;}
+    .card{ border:1px solid var(--border); border-radius:16px; background:#fff; box-shadow:0 8px 26px rgba(0,0,0,.06); overflow:hidden;}
+    .card-h{ padding:14px 16px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; gap:12px; align-items:center; flex-wrap:wrap;}
+    .card-h h2{ margin:0; font-size:15px; color:var(--navy); }
+    .card-b{ padding:14px 16px; }
+    label{ display:block; font-size:12px; font-weight:800; color:#374151; margin:10px 0 6px;}
+    input, select, textarea{
+      width:100%; box-sizing:border-box; padding:10px 10px;
+      border-radius:10px; border:1px solid var(--border); outline:none;
+      font-size:13px; background:#fff;
+    }
+    textarea{ min-height:120px; font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace; font-size:12px; }
+    .cols{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+    @media (max-width:900px){ .cols{ grid-template-columns:1fr; } }
+    .hint{ color:#6b7280; font-size:12px; margin-top:6px; }
+    .ok{ color:#065f46; background:rgba(16,185,129,.10); border:1px solid rgba(16,185,129,.25); padding:10px 12px; border-radius:12px; font-size:13px; font-weight:800;}
+    .err{ color:#991b1b; background:rgba(220,38,38,.08); border:1px solid rgba(220,38,38,.25); padding:10px 12px; border-radius:12px; font-size:13px; font-weight:800;}
+    table{ width:100%; border-collapse:separate; border-spacing:0; }
+    th, td{ padding:10px; border-bottom:1px solid var(--border); vertical-align:top; font-size:13px; }
+    th{ text-align:left; color:var(--navy); font-size:12px; letter-spacing:.02em; text-transform:uppercase; background:var(--muted); position:sticky; top:74px; z-index:5; }
+    .table-wrap{ overflow:auto; max-height:65vh; border:1px solid var(--border); border-radius:14px; }
+    .mini{ font-size:11px; color:#6b7280; }
+    .actions{ display:flex; gap:8px; }
+    .link{ color:var(--navy); font-weight:800; text-decoration:none; }
+    .link:hover{ text-decoration:underline; }
+    .search{ flex:1 1 260px; min-width:220px; }
+    .right{ margin-left:auto; display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+    .kbd{ font-family:ui-monospace,Menlo,monospace; font-size:11px; padding:3px 7px; border-radius:8px; background:#fff; border:1px solid var(--border); color:#374151; }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="wrap">
+    <div style="display:flex; justify-content:space-between; gap:12px; align-items:flex-start; flex-wrap:wrap;">
+      <div>
+        <h1>Rules editor – Žij padel</h1>
+        <div class="sub">
+          Načítá <span class="kbd">./data/zp-racket-rules.json</span> a umí exportovat nový JSON. Pro „uložení“ do GitHubu stáhni soubor a commitni ho do <span class="kbd">/data</span>.
+        </div>
+      </div>
+      <div class="right">
+        <span id="statusPill" class="pill">—</span>
+        <button class="btn btn-ghost" id="btnReload">Reload</button>
+        <button class="btn btn-ghost" id="btnCopy">Copy JSON</button>
+        <button class="btn btn-primary" id="btnDownload">Download JSON</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <input id="search" class="search" placeholder="Hledat v pravidlech… (age/sex/level/preference/name/url)" />
+      <button class="btn btn-primary" id="btnAdd">+ Přidat pravidlo</button>
+      <button class="btn btn-ghost" id="btnSort">Seřadit A→Z</button>
+      <button class="btn btn-danger" id="btnDeleteFiltered">Smazat filtrované</button>
+      <span class="mini">Tip: pro rychlou úpravu klikni do buňky.</span>
+    </div>
+  </div>
+</header>
+
+<div class="grid wrap">
+  <div class="card">
+    <div class="card-h">
+      <h2>Child product (Dítě 6–15)</h2>
+      <span class="mini">Použije se, když odpověď age = „Dítě (6–15)“</span>
+    </div>
+    <div class="card-b">
+      <div class="cols">
+        <div>
+          <label>Název</label>
+          <input id="cpName" />
+        </div>
+        <div>
+          <label>URL</label>
+          <input id="cpUrl" />
+        </div>
+        <div>
+          <label>Image</label>
+          <input id="cpImage" />
+        </div>
+      </div>
+      <div class="hint">Doporučení: nech URL s UTM parametry, ať vidíš konverze z kvízu.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-h">
+      <h2>Rules</h2>
+      <div class="row" style="margin:0;">
+        <span class="pill" id="countAll">—</span>
+        <span class="pill" id="countShown">—</span>
+      </div>
+    </div>
+    <div class="card-b">
+      <div id="msg"></div>
+      <div class="table-wrap">
+        <table id="rulesTable">
+          <thead>
+            <tr>
+              <th style="min-width:170px;">Age</th>
+              <th style="min-width:90px;">Sex</th>
+              <th style="min-width:210px;">Level</th>
+              <th style="min-width:160px;">Preference</th>
+              <th style="min-width:260px;">Product</th>
+              <th style="min-width:260px;">URL</th>
+              <th style="min-width:260px;">Image</th>
+              <th style="min-width:120px;">Akce</th>
+            </tr>
+          </thead>
+          <tbody id="rulesBody"></tbody>
+        </table>
+      </div>
+
+      <div style="margin-top:14px;">
+        <label>Aktuální JSON (read-only preview)</label>
+        <textarea id="jsonPreview" readonly></textarea>
+        <div class="hint">Preview se aktualizuje automaticky při editaci.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const RULES_URL = './data/zp-racket-rules.json';
+
+  const $ = (id) => document.getElementById(id);
+
+  const state = {
+    data: { childProduct: { name:'', url:'', image:'' }, rules: [] },
+    filteredIdx: [],
+    sortAZ: false,
+  };
+
+  function setMsg(html, kind) {
+    const el = $('msg');
+    if (!html) { el.innerHTML = ''; return; }
+    el.innerHTML = `<div class="${kind === 'err' ? 'err' : 'ok'}">${html}</div>`;
+  }
+
+  function setPill(text) { $('statusPill').textContent = text; }
+
+  function normalize(s){ return (s ?? '').toString().trim(); }
+  function includes(hay, needle){ return hay.toLowerCase().includes(needle.toLowerCase()); }
+
+  function buildJSON() {
+    const cp = {
+      name: normalize($('cpName').value),
+      url: normalize($('cpUrl').value),
+      image: normalize($('cpImage').value),
+    };
+    // rules already in state.data.rules
+    return { childProduct: cp, rules: state.data.rules };
+  }
+
+  function refreshPreview() {
+    const obj = buildJSON();
+    $('jsonPreview').value = JSON.stringify(obj, null, 2);
+    $('countAll').textContent = `Všechna pravidla: ${state.data.rules.length}`;
+    $('countShown').textContent = `Zobrazeno: ${state.filteredIdx.length}`;
+    setPill(`Loaded • ${state.data.rules.length} rules`);
+  }
+
+  function renderTable() {
+    const tbody = $('rulesBody');
+    tbody.innerHTML = '';
+
+    const q = normalize($('search').value);
+    const rules = state.data.rules;
+
+    // filter indexes
+    let idx = rules.map((_, i) => i);
+    if (q) {
+      idx = idx.filter(i => {
+        const r = rules[i];
+        const p = r.product || {};
+        const hay =
+          `${r.age||''} ${r.sex||''} ${r.level||''} ${r.preference||''} ` +
+          `${p.name||''} ${p.url||''} ${p.image||''}`;
+        return includes(hay, q);
+      });
+    }
+
+    // sort (optional)
+    if (state.sortAZ) {
+      idx.sort((a,b) => {
+        const ra = rules[a], rb = rules[b];
+        const ka = `${ra.age||''}|${ra.sex||''}|${ra.level||''}|${ra.preference||''}|${(ra.product?.name)||''}`.toLowerCase();
+        const kb = `${rb.age||''}|${rb.sex||''}|${rb.level||''}|${rb.preference||''}|${(rb.product?.name)||''}`.toLowerCase();
+        return ka.localeCompare(kb);
+      });
+    }
+
+    state.filteredIdx = idx;
+
+    for (const i of idx) {
+      const r = rules[i];
+      const p = r.product || (r.product = { name:'', url:'', image:'' });
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><input data-i="${i}" data-k="age" value="${escapeHtml(r.age||'')}" /></td>
+        <td><input data-i="${i}" data-k="sex" value="${escapeHtml(r.sex||'')}" /></td>
+        <td><input data-i="${i}" data-k="level" value="${escapeHtml(r.level||'')}" /></td>
+        <td><input data-i="${i}" data-k="preference" value="${escapeHtml(r.preference||'')}" /></td>
+
+        <td><input data-i="${i}" data-k="product.name" value="${escapeHtml(p.name||'')}" /></td>
+        <td><input data-i="${i}" data-k="product.url" value="${escapeHtml(p.url||'')}" /></td>
+        <td><input data-i="${i}" data-k="product.image" value="${escapeHtml(p.image||'')}" /></td>
+
+        <td>
+          <div class="actions">
+            <button class="btn btn-ghost" data-action="dup" data-i="${i}">Duplikovat</button>
+            <button class="btn btn-danger" data-action="del" data-i="${i}">Smazat</button>
+          </div>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    }
+
+    refreshPreview();
+  }
+
+  function escapeHtml(s){
+    return String(s ?? '')
+      .replaceAll('&','&amp;')
+      .replaceAll('<','&lt;')
+      .replaceAll('>','&gt;')
+      .replaceAll('"','&quot;')
+      .replaceAll("'","&#039;");
+  }
+
+  function updateRule(i, key, value){
+    const r = state.data.rules[i];
+    if (!r) return;
+    const v = normalize(value);
+
+    if (key === 'age') r.age = v;
+    else if (key === 'sex') r.sex = v;
+    else if (key === 'level') r.level = v;
+    else if (key === 'preference') r.preference = v;
+    else if (key === 'product.name') r.product.name = v;
+    else if (key === 'product.url') r.product.url = v;
+    else if (key === 'product.image') r.product.image = v;
+  }
+
+  function addRule(prefill = {}) {
+    state.data.rules.push({
+      age: prefill.age || 'Dospělý (16–59)',
+      sex: prefill.sex || 'Muž',
+      level: prefill.level || 'Začátečník',
+      preference: prefill.preference || 'Kontrolu',
+      product: {
+        name: prefill.name || '',
+        url: prefill.url || '',
+        image: prefill.image || ''
+      }
+    });
+    setMsg('Přidáno nové pravidlo. Nezapomeň <b>Download JSON</b> a commit do <code>/data</code>.', 'ok');
+    renderTable();
+    // scroll down a bit to show new row
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  }
+
+  function duplicateRule(i){
+    const src = state.data.rules[i];
+    if (!src) return;
+    const copy = JSON.parse(JSON.stringify(src));
+    state.data.rules.splice(i+1, 0, copy);
+    setMsg('Pravidlo duplikováno.', 'ok');
+    renderTable();
+  }
+
+  function deleteRule(i){
+    state.data.rules.splice(i, 1);
+    setMsg('Pravidlo smazáno.', 'ok');
+    renderTable();
+  }
+
+  function deleteFiltered(){
+    if (!state.filteredIdx.length) return;
+    // delete from end to start so indexes don't shift
+    const idx = [...state.filteredIdx].sort((a,b)=>b-a);
+    for (const i of idx) state.data.rules.splice(i, 1);
+    setMsg(`Smazáno ${idx.length} pravidel (aktuální filtr).`, 'ok');
+    $('search').value = '';
+    renderTable();
+  }
+
+  async function load() {
+    setMsg('', '');
+    setPill('Loading…');
+    try {
+      const res = await fetch(RULES_URL, { cache: 'no-store' });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+
+      // normalize
+      state.data = {
+        childProduct: data.childProduct || { name:'', url:'', image:'' },
+        rules: Array.isArray(data.rules) ? data.rules : []
+      };
+
+      $('cpName').value = state.data.childProduct.name || '';
+      $('cpUrl').value = state.data.childProduct.url || '';
+      $('cpImage').value = state.data.childProduct.image || '';
+
+      setMsg(`Načteno z <code>${RULES_URL}</code>.`, 'ok');
+      renderTable();
+    } catch (e) {
+      console.error(e);
+      setMsg(`Nepodařilo se načíst <code>${RULES_URL}</code>. Zkontroluj cestu a JSON.`, 'err');
+      setPill('Error');
+    }
+  }
+
+  function downloadJSON() {
+    const obj = buildJSON();
+    const blob = new Blob([JSON.stringify(obj, null, 2)], { type:'application/json;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'zp-racket-rules.json';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+    setMsg('Staženo. Teď nahraj/commitni soubor do repa jako <code>/data/zp-racket-rules.json</code>.', 'ok');
+  }
+
+  async function copyJSON() {
+    try{
+      await navigator.clipboard.writeText($('jsonPreview').value);
+      setMsg('JSON zkopírován do schránky.', 'ok');
+    }catch{
+      setMsg('Nepodařilo se zkopírovat do schránky (blokované oprávnění). Použij ruční copy z preview.', 'err');
+    }
+  }
+
+  // events
+  $('rulesBody').addEventListener('input', (e) => {
+    const el = e.target;
+    if (!(el instanceof HTMLInputElement)) return;
+    const i = Number(el.getAttribute('data-i'));
+    const k = el.getAttribute('data-k');
+    if (!Number.isFinite(i) || !k) return;
+    updateRule(i, k, el.value);
+    refreshPreview();
+  });
+
+  $('rulesBody').addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-action]');
+    if (!btn) return;
+    const action = btn.getAttribute('data-action');
+    const i = Number(btn.getAttribute('data-i'));
+    if (!Number.isFinite(i)) return;
+    if (action === 'del') deleteRule(i);
+    if (action === 'dup') duplicateRule(i);
+  });
+
+  $('search').addEventListener('input', () => renderTable());
+  $('cpName').addEventListener('input', refreshPreview);
+  $('cpUrl').addEventListener('input', refreshPreview);
+  $('cpImage').addEventListener('input', refreshPreview);
+
+  $('btnAdd').addEventListener('click', () => addRule());
+  $('btnSort').addEventListener('click', () => { state.sortAZ = !state.sortAZ; renderTable(); });
+  $('btnDeleteFiltered').addEventListener('click', () => deleteFiltered());
+  $('btnDownload').addEventListener('click', downloadJSON);
+  $('btnCopy').addEventListener('click', copyJSON);
+  $('btnReload').addEventListener('click', load);
+
+  // start
+  load();
+</script>
+</body>
+</html>
