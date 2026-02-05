@@ -6,68 +6,77 @@
   <title>Racket Finder – Žij padel</title>
 
   <style>
-    :root { --zp-navy:#003d79; --zp-lime:#c6e801; --zp-text:#1e1e1e; --zp-muted:#f6f8fb; --zp-border:rgba(0,61,121,.16);}
+    :root{--zp-navy:#003d79;--zp-lime:#c6e801;--zp-text:#1e1e1e;--zp-muted:#f6f8fb;--zp-border:rgba(0,61,121,.16);}
+    #zp-quiz{font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;max-width:880px;margin:0 auto;padding:20px;color:var(--zp-text);}
+    .zp-quiz__card{background:#fff;border:1px solid var(--zp-border);border-radius:16px;box-shadow:0 6px 22px rgba(0,0,0,.06);overflow:hidden;}
+    .zp-quiz__title{font-size:26px;font-weight:800;color:var(--zp-navy);text-align:center;margin:20px 0 10px;}
+    .zp-quiz__subtitle{text-align:center;color:#444;font-size:15px;margin:0 0 18px;}
+    .zp-quiz__progressbar{height:8px;background:var(--zp-muted);border-radius:999px;overflow:hidden;}
+    .zp-quiz__progressbar>span{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--zp-lime),#d9ff4a);transition:width .3s ease;}
+    .zp-quiz__progress{padding:0 20px 8px;}
+    .zp-quiz__progress-label{font-size:13px;color:#5a5a5a;margin-top:8px;text-align:right;}
+    .zp-quiz__body{padding:20px;}
 
-    #zp-quiz { font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; max-width:880px; margin:0 auto; padding:20px; color:var(--zp-text);}
-    .zp-quiz__card { background:#fff; border:1px solid var(--zp-border); border-radius:16px; box-shadow:0 6px 22px rgba(0,0,0,.06); overflow:hidden;}
-    .zp-quiz__title { font-size:26px; font-weight:700; color:var(--zp-navy); text-align:center; margin:20px 0 10px;}
-    .zp-quiz__subtitle { text-align:center; color:#444; font-size:15px; margin:0 0 18px;}
-    .zp-quiz__progressbar { height:8px; background:var(--zp-muted); border-radius:999px; overflow:hidden; }
-    .zp-quiz__progressbar > span { display:block; height:100%; width:0%; background:linear-gradient(90deg,var(--zp-lime),#d9ff4a); transition:width .3s ease; }
-    .zp-quiz__progress { padding:0 20px 8px; }
-    .zp-quiz__progress-label { font-size:13px; color:#5a5a5a; margin-top:8px; text-align:right; }
-    .zp-quiz__body { padding:20px; }
+    .zp-step{display:none;} .zp-step.active{display:block;}
+    .zp-step h3{font-size:20px;color:var(--zp-navy);margin:0 0 14px;line-height:1.3;}
 
-    .zp-step { display:none; } .zp-step.active { display:block; }
-    .zp-step h3 { font-size:20px; color:var(--zp-navy); margin:0 0 14px; line-height:1.3; }
+    .zp-options{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+    @media (max-width:860px){.zp-options{grid-template-columns:repeat(2,1fr);}}
+    @media (max-width:520px){.zp-options{grid-template-columns:1fr;}}
 
-    .zp-options { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
-    @media (max-width:860px){ .zp-options{ grid-template-columns:repeat(2,1fr);} }
-    @media (max-width:520px){ .zp-options{ grid-template-columns:1fr;} }
+    .zp-option{border:1px solid var(--zp-border);border-radius:12px;padding:14px;background:#fff;cursor:pointer;transition:transform .15s ease,box-shadow .2s ease,border-color .2s ease;user-select:none;min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:10px;}
+    .zp-option:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,.06);}
+    .zp-option.selected{border-color:var(--zp-lime);box-shadow:0 4px 18px rgba(198,232,1,.22);}
+    .zp-option__label{font-size:15px;font-weight:700;}
+    .zp-option__dot{width:18px;height:18px;border-radius:50%;border:2px solid var(--zp-border);position:relative;flex:0 0 auto;}
+    .zp-option.selected .zp-option__dot{border-color:var(--zp-lime);}
+    .zp-option.selected .zp-option__dot::after{content:'';position:absolute;inset:3px;border-radius:50%;background:var(--zp-lime);}
 
-    .zp-option { border:1px solid var(--zp-border); border-radius:12px; padding:14px; background:#fff; cursor:pointer; transition:transform .15s ease, box-shadow .2s ease, border-color .2s ease; user-select:none; min-height:64px; display:flex; align-items:center; justify-content:space-between; gap:10px;}
-    .zp-option:hover { transform:translateY(-1px); box-shadow:0 4px 14px rgba(0,0,0,.06);}
-    .zp-option.selected { border-color:var(--zp-lime); box-shadow:0 4px 18px rgba(198,232,1,.22);}
-    .zp-option__label { font-size:15px; font-weight:600;}
-    .zp-option__dot { width:18px; height:18px; border-radius:50%; border:2px solid var(--zp-border); position:relative; flex:0 0 auto; }
-    .zp-option.selected .zp-option__dot { border-color:var(--zp-lime);}
-    .zp-option.selected .zp-option__dot::after { content:''; position:absolute; inset:3px; border-radius:50%; background:var(--zp-lime);}
+    .zp-quiz__nav{display:flex;justify-content:space-between;gap:12px;margin-top:18px;}
+    .zp-btn{appearance:none;border:0;cursor:pointer;border-radius:10px;padding:12px 16px;font-weight:800;font-size:15px;display:inline-flex;align-items:center;gap:8px;}
+    .zp-btn--primary{background:var(--zp-lime);color: var(--zp-navy);box-shadow:0 6px 16px rgba(198,232,1,.35);}
+    .zp-btn--ghost{background:#fff;color:var(--zp-navy);border:1px solid var(--zp-border);}
+    .zp-btn[disabled]{opacity:.55;cursor:not-allowed;}
+    /* obal odkazu – nese animaci */
+    .zp-tip-link{display:block;animation:zpTipPulse 3.2s ease-in-out infinite}
+    .zp-tip-link:hover{animation:none}
 
-    .zp-quiz__nav { display:flex; justify-content:space-between; gap:12px; margin-top:18px;}
-    .zp-btn { appearance:none; border:0; cursor:pointer; border-radius:10px; padding:12px 16px; font-weight:700; font-size:15px; display:inline-flex; align-items:center; gap:8px; }
-    .zp-btn--primary { background:var(--zp-lime); color:#0b0b0b; box-shadow:0 6px 16px rgba(198,232,1,.35);}
-    .zp-btn--ghost { background:#fff; color:var(--zp-navy); border:1px solid var(--zp-border);}
+    /* samotné tlačítko – fixní barvy */
+    .zp-tip-link .zp-btn{background:var(--zp-navy);color:var(--zp-lime);gap:10px}
 
-    .zp-result { text-align:center; padding:0 6px; }
-    .zp-quiz__result-media { display:grid; grid-template-columns:360px 1fr; gap:18px; align-items:center; margin:18px 0; }
-    @media (max-width:760px){ .zp-quiz__result-media{ grid-template-columns:1fr;} }
-    .zp-quiz__result-image { width:100%; aspect-ratio:4/5; border:1px solid var(--zp-border); border-radius:12px; overflow:hidden; background:#fff; display:grid; place-items:center; }
-    .zp-quiz__result-image img { display:block; width:100%; height:100%; object-fit:contain; }
-    .zp-quiz__result-image--placeholder { width:100%; height:100%; display:grid; place-items:center; background:linear-gradient(135deg,#f7f9fc,#eef3fb); color:#6a6a6a; font-weight:600; font-size:14px; text-align:center; padding:16px; }
-
-    .zp-result__title { font-size:24px; color:var(--zp-navy); margin:6px 0 6px; }
-    .zp-helper { font-size:12px; color:#6a6a6a; margin-top:8px; }
-
-    .zp-error {
-      display:none;
-      margin: 12px 20px 0;
-      padding: 12px 14px;
-      border: 1px solid rgba(220,38,38,.25);
-      background: rgba(220,38,38,.06);
-      color: #991b1b;
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 14px;
+    /* jemná pulzní animace (bez změny barev) */
+    @keyframes zpTipPulse{
+      0%{transform:scale(1);filter:drop-shadow(0 6px 16px rgba(198,232,1,.35))}
+      50%{transform:scale(1.03);filter:drop-shadow(0 10px 26px rgba(198,232,1,.55))}
+      100%{transform:scale(1);filter:drop-shadow(0 6px 16px rgba(198,232,1,.35))}
     }
-    .zp-error code { font-weight: 700; }
+
+    .zp-result{text-align:center;padding:0 6px;}
+    .zp-quiz__result-media{display:grid;grid-template-columns:360px 1fr;gap:18px;align-items:center;margin:18px 0;}
+    @media (max-width:760px){.zp-quiz__result-media{grid-template-columns:1fr;}}
+    .zp-quiz__result-image{width:100%;aspect-ratio:4/5;border:1px solid var(--zp-border);border-radius:12px;overflow:hidden;background:#fff;display:grid;place-items:center;}
+    .zp-quiz__result-image img,.zp-quiz__result-image video{display:block;width:100%;height:100%;object-fit:cover;}
+    .zp-quiz__result-image--placeholder{width:100%;height:100%;display:grid;place-items:center;background:linear-gradient(135deg,#f7f9fc,#eef3fb);color:#6a6a6a;font-weight:700;font-size:14px;text-align:center;padding:16px;}
+
+    .zp-result__title{font-size:24px;color:var(--zp-navy);margin:6px 0 6px;font-weight:900;}
+    .zp-helper{font-size:12px;color:#6a6a6a;margin-top:8px;}
+
+    .zp-result__actions{display:flex;flex-direction:column;gap:10px;margin-top:12px;}
+    .zp-result__actions-row{justify-content:center;margin-top:0 !important;}
+    .zp-result__actions-row2{display:flex;justify-content:center;width:100%;}
+    .zp-result__actions-row2 a{width:100%;max-width:520px;}
+    .zp-result__actions-row2 .zp-btn{width:100%;justify-content:center;}
+
+    .zp-error{display:none;margin:12px 20px 0;padding:12px 14px;border:1px solid rgba(220,38,38,.25);background:rgba(220,38,38,.06);color:#991b1b;border-radius:12px;font-weight:700;font-size:14px;}
+    .zp-error code{font-weight:800;}
   </style>
 </head>
 
 <body>
   <div id="zp-quiz" class="zp-quiz__card">
     <div class="zp-quiz__header">
-      <h2 class="zp-quiz__title">Vyhledávač padelovových raket</h2>
-      <p class="zp-quiz__subtitle">Najdeme ti ideální padelovou raketu během pár kliknutí.</p>
+      <h2 class="zp-quiz__title">Vyhledávač padelových raket</h2>
+      <p class="zp-quiz__subtitle">Najdeme ti ideální rakety během pár kliknutí.</p>
 
       <div class="zp-quiz__progress">
         <div class="zp-quiz__progressbar"><span></span></div>
@@ -121,7 +130,7 @@
         <div class="zp-options" role="group" aria-label="Úroveň">
           <button class="zp-option" data-value="Začátečník"><span class="zp-option__label">Začátečník</span><span class="zp-option__dot"></span></button>
           <button class="zp-option" data-value="Pokročilý"><span class="zp-option__label">Pokročilý</span><span class="zp-option__dot"></span></button>
-          <button class="zp-option" data-value="Velmi zdatný hráč / expert"><span class="zp-option__label">Pokročilý až expert</span><span class="zp-option__dot"></span></button>
+          <button class="zp-option" data-value="Expert"><span class="zp-option__label">Pokročilý až expert</span><span class="zp-option__dot"></span></button>
         </div>
         <div class="zp-quiz__nav">
           <button class="zp-btn zp-btn--ghost" data-action="back">Předchozí</button>
@@ -129,12 +138,12 @@
         </div>
       </section>
 
-      <section class="zp-step" data-step="preference" aria-label="Preferovaný styl">
+      <section class="zp-step" data-step="style" aria-label="Preferovaný styl">
         <h3>Co preferuješ?</h3>
         <div class="zp-options" role="group" aria-label="Preference">
-          <button class="zp-option" data-value="Kontrolu"><span class="zp-option__label">Kontrolu</span><span class="zp-option__dot"></span></button>
+          <button class="zp-option" data-value="Kontrola"><span class="zp-option__label">Kontrolu</span><span class="zp-option__dot"></span></button>
           <button class="zp-option" data-value="Univerzálnost"><span class="zp-option__label">Univerzálnost</span><span class="zp-option__dot"></span></button>
-          <button class="zp-option" data-value="Sílu"><span class="zp-option__label">Sílu</span><span class="zp-option__dot"></span></button>
+          <button class="zp-option" data-value="Síla"><span class="zp-option__label">Sílu</span><span class="zp-option__dot"></span></button>
         </div>
         <div class="zp-quiz__nav">
           <button class="zp-btn zp-btn--ghost" data-action="back">Předchozí</button>
@@ -146,17 +155,24 @@
         <div class="zp-result">
           <div class="zp-quiz__result-media">
             <div class="zp-quiz__result-image" id="zp-result-image">
-              <div class="zp-quiz__result-image--placeholder">Obrázek produktu<br><small>(doplňte v RULES)</small></div>
+              <div class="zp-quiz__result-image--placeholder">Video výsledku</div>
             </div>
             <div>
               <span class="zp-helper">Doporučení</span>
               <h3 class="zp-result__title" id="zp-result-title">—</h3>
               <p class="zp-helper" id="zp-result-subtitle">—</p>
-              <div id="zp-result-desc">Na základě tvých odpovědí jsme vybrali raketu, která by ti měla sedět.</div>
-              <div class="zp-quiz__nav" style="justify-content:center; margin-top:12px;">
-                <button class="zp-btn zp-btn--ghost" data-action="restart">Začít znovu</button>
-                <span id="zp-result-cta"></span>
+              <div id="zp-result-desc">—</div>
+
+              <div class="zp-result__actions">
+                <div class="zp-quiz__nav zp-result__actions-row">
+                  <button class="zp-btn zp-btn--ghost" data-action="restart">Začít znovu</button>
+                  <span id="zp-result-cta"></span>
+                </div>
+                <div class="zp-result__actions-row2">
+                  <span id="zp-result-cta-tip"></span>
+                </div>
               </div>
+
             </div>
           </div>
         </div>
@@ -167,7 +183,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
-      const RULES_URL = './data/zp-racket-rules.json';
+      const RULES_URL = './data/zp-filter-rules-videos-tip.json';
 
       const root = document.getElementById('zp-quiz');
       if (!root) return;
@@ -179,55 +195,57 @@
         errorBox.innerHTML = msg;
       };
 
-      // --- Load JSON ---
       let RULES = [];
-      let CHILD_PRODUCT = null;
 
       async function loadRules() {
         const res = await fetch(RULES_URL, { cache: 'no-store' });
         if (!res.ok) throw new Error('HTTP ' + res.status);
         const data = await res.json();
         RULES = Array.isArray(data.rules) ? data.rules : [];
-        CHILD_PRODUCT = data.childProduct || null;
       }
 
-      try {
-        await loadRules();
-      } catch (err) {
-        console.error('Chyba načítání JSON:', err);
-        showError(
-          'Nepodařilo se načíst pravidla kvízu z <code>' + RULES_URL +
-          '</code>. Zkontroluj, že soubor existuje v repu a má správný JSON.'
-        );
+      try { await loadRules(); }
+      catch (err) {
+        console.error('Chyba načítání pravidel:', err);
+        showError('Nepodařilo se načíst pravidla z <code>' + RULES_URL + '</code>. Zkontroluj, že soubor existuje a je validní JSON.');
       }
 
-      // --- UI/State ---
       const steps = Array.from(root.querySelectorAll('.zp-step'));
       const progressBar = root.querySelector('.zp-quiz__progressbar > span');
       const progressLabel = root.querySelector('#zp-progress-label');
 
-      const ORDER = ['age','sex','frequency','level','preference','result'];
+      const ORDER = ['age','sex','frequency','level','style','result'];
       const RESULT_INDEX = ORDER.indexOf('result');
 
-      const state = {
-        stepIndex: 0,
-        answers: { age:null, sex:null, frequency:null, level:null, preference:null }
-      };
-
-      function matchRule(answers) {
-        for (const rule of RULES) {
-          const ok = ['age','sex','level','preference'].every(key => rule[key] === answers[key]);
-          if (ok) return rule.product;
-        }
-        return { name: 'DOPLNIT PRODUKT!', url: '', image: '' };
-      }
+      const state = { stepIndex: 0, answers: { age:null, sex:null, frequency:null, level:null, style:null } };
 
       function setProgress() {
-        const totalSteps = ORDER.length - 1; // bez "result"
+        const totalSteps = ORDER.length - 1;
         const currentStep = Math.min(state.stepIndex + 1, totalSteps);
         const pct = ((currentStep - 1) / (totalSteps - 1)) * 100;
         if (progressBar) progressBar.style.width = pct + '%';
         if (progressLabel) progressLabel.textContent = `Krok ${currentStep} z ${totalSteps}`;
+      }
+      
+      function updateStyleOptions() {
+        const styleStep = root.querySelector('.zp-step[data-step="style"]');
+        if (!styleStep) return;
+
+        const isBeginner = state.answers.level === 'Začátečník';
+
+        styleStep.querySelectorAll('.zp-option').forEach(opt => {
+          const val = opt.getAttribute('data-value');
+          if (val === 'Síla') {
+            opt.style.display = isBeginner ? 'none' : '';
+            if (isBeginner) opt.classList.remove('selected');
+          }
+        });
+
+        if (isBeginner && state.answers.style === 'Síla') {
+          state.answers.style = null;
+          const finishBtn = styleStep.querySelector('[data-action="finish"]');
+          if (finishBtn) finishBtn.disabled = true;
+        }
       }
 
       function showStep(index) {
@@ -242,6 +260,9 @@
           const val = state.answers[stepKey];
           nextBtn.disabled = !val;
         }
+        if (active.getAttribute('data-step') === 'style') {
+          updateStyleOptions();
+        }
       }
 
       function handleOptionClick(stepEl, btn) {
@@ -254,82 +275,135 @@
 
         const advanceBtn = stepEl.querySelector('[data-action="next"], [data-action="finish"]');
         if (advanceBtn) advanceBtn.disabled = false;
+        if (key === 'level') {
+          updateStyleOptions();
+        }
       }
 
-      function renderResult(product) {
+      function findRule(a) {
+        if (a.age === 'Dítě (6–15)') {
+          return RULES.find(r => r.age === 'Dítě (6–15)') || null;
+        }
+        return RULES.find(r =>
+          (r.age === '*' || !r.age) &&
+          (r.frequency === a.frequency) &&
+          (r.level === a.level) &&
+          (r.style === a.style)
+        ) || null;
+      }
+
+      function renderResult(rule) {
         const titleEl = root.querySelector('#zp-result-title');
         const subEl = root.querySelector('#zp-result-subtitle');
-        const imgWrap = root.querySelector('#zp-result-image');
+        const wrap = root.querySelector('#zp-result-image');
         const cta = root.querySelector('#zp-result-cta');
+        const ctaTip = root.querySelector('#zp-result-cta-tip');
+        const desc = root.querySelector('#zp-result-desc');
 
-        const safe = product || { name:'DOPLNIT PRODUKT!', url:'', image:'' };
+        const a = state.answers;
+        const safe = rule || { redirectUrl:'https://www.zijpadel.cz/rakety-na-padel/', tipRedirectUrl:'', mediaUrl:'', mediaType:'video', fallbackImageUrl:'' };
 
-        titleEl.textContent = safe.name || 'DOPLNIT PRODUKT!';
-        subEl.textContent = (safe.name && safe.name !== 'DOPLNIT PRODUKT!')
-          ? 'Tohle by pro tebe mohla být skvělá volba.'
-          : 'Nemáme přiřazený produkt pro tuto kombinaci.';
+        titleEl.textContent = (a.age === 'Dítě (6–15)') ? 'Doporučení pro děti' : `Doporučení: ${a.style} • ${a.level}`;
+        subEl.textContent = [a.age, a.sex, a.frequency].filter(Boolean).join(' • ');
+        desc.textContent = (a.age === 'Dítě (6–15)')
+          ? 'Vybrali jsme vhodnou dětskou raketu.'
+          : `Podle tvého stylu (${a.style}), úrovně (${a.level}) a frekvence hraní (${a.frequency}) jsme vybrali nejvhodnější výběr.`;
 
-        imgWrap.innerHTML = '';
-        if (safe.image) {
+        // media (video -> fallback image)
+        wrap.innerHTML = '';
+        if (safe.mediaType === 'video' && safe.mediaUrl) {
+          const v = document.createElement('video');
+          v.src = safe.mediaUrl;
+          v.autoplay = true;
+          v.loop = false;
+          v.muted = true;
+          v.playsInline = true;
+          v.setAttribute('preload','metadata');
+
+          v.addEventListener('error', () => {
+            if (!safe.fallbackImageUrl) return;
+            wrap.innerHTML = '';
+            const img = document.createElement('img');
+            img.src = safe.fallbackImageUrl;
+            img.alt = titleEl.textContent || 'Výsledek kvízu';
+            wrap.appendChild(img);
+          });
+
+          wrap.appendChild(v);
+        } else if (safe.fallbackImageUrl) {
           const img = document.createElement('img');
-          img.src = safe.image;
-          img.alt = safe.name || '';
-          imgWrap.appendChild(img);
+          img.src = safe.fallbackImageUrl;
+          img.alt = titleEl.textContent || 'Výsledek kvízu';
+          wrap.appendChild(img);
         } else {
           const ph = document.createElement('div');
           ph.className = 'zp-quiz__result-image--placeholder';
-          ph.innerHTML = 'Obrázek produktu<br><small>(doplňte v RULES)</small>';
-          imgWrap.appendChild(ph);
+          ph.textContent = 'Video/obrázek není nastaven';
+          wrap.appendChild(ph);
         }
 
+        // CTA 1: všechny rakety pro filtr
         cta.innerHTML = '';
-        if (safe.url) {
-          const a = document.createElement('a');
-          a.href = safe.url;
-          a.target = '_top';
-          a.innerHTML = '<button class="zp-btn zp-btn--primary">Zobrazit produkt</button>';
-          cta.appendChild(a);
+        const link = document.createElement('a');
+        link.href = safe.redirectUrl || 'https://www.zijpadel.cz/rakety-na-padel/';
+        link.target = '_top';
+        link.innerHTML = '<button class="zp-btn zp-btn--primary">Zobrazit rakety</button>';
+        cta.appendChild(link);
+
+        // CTA 2: TIP (doporučené)
+        if (ctaTip) {
+          ctaTip.innerHTML = '';
+          const tipUrl = safe.tipRedirectUrl || '';
+          if (tipUrl) {
+            const tipLink = document.createElement('a');
+            tipLink.href = tipUrl;
+            tipLink.target = '_top';
+            tipLink.className = 'zp-tip-link';
+            tipLink.innerHTML = '<button class="zp-btn zp-btn--primary">Zobrazit naše tipy 💡</button>';
+            ctaTip.appendChild(tipLink);
+          }
         }
       }
 
       function next() {
         const currentStepKey = ORDER[state.stepIndex];
-
-        // dítě -> childProduct z JSONu
+        // pokud jsme na kroku "věk" a je zvoleno dítě → rovnou výsledek
         if (currentStepKey === 'age' && state.answers.age === 'Dítě (6–15)') {
-          renderResult(CHILD_PRODUCT || { name:'DOPLNIT PRODUKT!', url:'', image:'' });
-          showStep(RESULT_INDEX);
+          goChildResult();
           return;
         }
-
-        const isLastQuestion = state.stepIndex === RESULT_INDEX - 1;
-        if (isLastQuestion) {
-          const product = matchRule(state.answers);
-          renderResult(product);
-          showStep(RESULT_INDEX);
-          return;
-        }
-
         showStep(Math.min(state.stepIndex + 1, RESULT_INDEX));
       }
+      function back(){ showStep(Math.max(state.stepIndex - 1, 0)); }
 
-      function back() { showStep(Math.max(state.stepIndex - 1, 0)); }
-      function finish() { next(); }
+      function finish(){
+        const rule = findRule(state.answers);
+        if (!rule) showError('Nenašli jsme pravidlo pro tuto kombinaci. Zkontroluj <code>' + RULES_URL + '</code>.');
+        renderResult(rule);
+        showStep(RESULT_INDEX);
+      }
 
-      function restart() {
+      function restart(){
         state.stepIndex = 0;
-        state.answers = { age:null, sex:null, frequency:null, level:null, preference:null };
-
+        state.answers = { age:null, sex:null, frequency:null, level:null, style:null };
         root.querySelectorAll('.zp-option').forEach(b => b.classList.remove('selected'));
         root.querySelectorAll('[data-action="next"], [data-action="finish"]').forEach(btn => btn.disabled = true);
-
         const firstBack = steps[0].querySelector('[data-action="back"]');
         if (firstBack) firstBack.disabled = true;
-
         showStep(0);
       }
 
-      // Option clicks
+      function goChildResult() {
+        state.answers.sex = null;
+        state.answers.frequency = null;
+        state.answers.level = null;
+        state.answers.style = null;
+
+        const childRule = RULES.find(r => r.age === 'Dítě (6–15)') || null;
+        renderResult(childRule);
+        showStep(RESULT_INDEX);
+      }
+
       root.querySelectorAll('.zp-step').forEach(stepEl => {
         stepEl.addEventListener('click', (e) => {
           const btn = e.target.closest('.zp-option');
@@ -338,17 +412,14 @@
         });
       });
 
-      // Nav buttons
       root.addEventListener('click', (e) => {
         const actionBtn = e.target.closest('[data-action]');
         if (!actionBtn) return;
-
         const action = actionBtn.getAttribute('data-action');
         if (action === 'next') next();
         if (action === 'back') back();
         if (action === 'finish') finish();
         if (action === 'restart') restart();
-
         const firstBack = steps[0].querySelector('[data-action="back"]');
         if (firstBack) firstBack.disabled = (state.stepIndex === 0);
       });
@@ -356,47 +427,34 @@
       setProgress();
     });
   </script>
+
   <script>
-(function () {
-  function getHeight() {
-    // vezmeme největší z relevantních výšek
-    const body = document.body;
-    const html = document.documentElement;
-    return Math.max(
-      body.scrollHeight, body.offsetHeight,
-      html.clientHeight, html.scrollHeight, html.offsetHeight
-    );
-  }
+  (function () {
+    function getHeight() {
+      const body = document.body;
+      const html = document.documentElement;
+      return Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+    }
+    let raf = null;
+    function sendHeight() {
+      if (raf) cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const h = getHeight();
+        window.parent.postMessage({ type: 'ZP_IFRAME_HEIGHT', height: h }, '*');
+      });
+    }
+    window.addEventListener('load', sendHeight);
+    window.addEventListener('resize', sendHeight);
 
-  let raf = null;
-  function sendHeight() {
-    if (raf) cancelAnimationFrame(raf);
-    raf = requestAnimationFrame(() => {
-      const h = getHeight();
-      window.parent.postMessage(
-        { type: 'ZP_IFRAME_HEIGHT', height: h },
-        '*'
-      );
-    });
-  }
+    const mo = new MutationObserver(sendHeight);
+    mo.observe(document.documentElement, { childList: true, subtree: true, attributes: true });
 
-  // posílej výšku po načtení
-  window.addEventListener('load', sendHeight);
-  // posílej výšku při resize
-  window.addEventListener('resize', sendHeight);
+    document.addEventListener('loadedmetadata', (e) => {
+      if (e.target && e.target.tagName === 'VIDEO') sendHeight();
+    }, true);
 
-  // posílej výšku při změnách DOM (kroky kvízu, výsledek, obrázek, atd.)
-  const mo = new MutationObserver(sendHeight);
-  mo.observe(document.documentElement, { childList: true, subtree: true, attributes: true });
-
-  // i když se teprve dočítají obrázky, po načtení obrázku znovu pošli výšku
-  document.addEventListener('load', (e) => {
-    if (e.target && e.target.tagName === 'IMG') sendHeight();
-  }, true);
-
-  // první “ping” hned
-  sendHeight();
-})();
-</script>
+    sendHeight();
+  })();
+  </script>
 </body>
 </html>
