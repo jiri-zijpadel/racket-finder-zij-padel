@@ -57,7 +57,12 @@
     .zp-quiz__result-image{width:100%;aspect-ratio:4/5;border:1px solid var(--zp-border);border-radius:12px;overflow:hidden;background:#fff;display:grid;place-items:center;}
     .zp-quiz__result-image img,.zp-quiz__result-image video{display:block;width:100%;height:100%;object-fit:cover;}
     .zp-quiz__result-image--placeholder{width:100%;height:100%;display:grid;place-items:center;background:linear-gradient(135deg,#f7f9fc,#eef3fb);color:#6a6a6a;font-weight:700;font-size:14px;text-align:center;padding:16px;}
+    .zp-quiz__result-image{background:#033a85;position:relative;overflow:hidden}
+    .zp-quiz__result-image>*{position:relative;z-index:1}
+    .zp-quiz__result-image::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(90deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.06) 50%,rgba(255,255,255,0) 100%);transform:translateX(-120%);animation:zpShimmer 1.6s ease-in-out infinite}
+    @keyframes zpShimmer{to{transform:translateX(120%)}}
 
+    
     .zp-result__title{font-size:24px;color:var(--zp-navy);margin:6px 0 6px;font-weight:900;}
     .zp-helper{font-size:12px;color:#6a6a6a;margin-top:8px;}
 
@@ -315,10 +320,11 @@
           const v = document.createElement('video');
           v.src = safe.mediaUrl;
           v.autoplay = true;
-          v.loop = false;
           v.muted = true;
           v.playsInline = true;
-          v.setAttribute('preload','metadata');
+          v.loop = false;
+          v.setAttribute('preload','auto');
+          if (safe.fallbackImageUrl) v.poster = safe.fallbackImageUrl;
 
           v.addEventListener('error', () => {
             if (!safe.fallbackImageUrl) return;
