@@ -314,7 +314,6 @@
           ? 'Vybrali jsme vhodnou dětskou raketu.'
           : `Podle tvého stylu (${a.style}), úrovně (${a.level}) a frekvence hraní (${a.frequency}) jsme vybrali nejvhodnější výběr.`;
 
-        // media (video -> fallback image)
         wrap.innerHTML = '';
         if (safe.mediaType === 'video' && safe.mediaUrl) {
           const v = document.createElement('video');
@@ -323,9 +322,14 @@
           v.muted = true;
           v.playsInline = true;
           v.loop = false;
-          v.setAttribute('preload','auto');
-          if (safe.fallbackImageUrl) v.poster = safe.fallbackImageUrl;
-
+          v.setAttribute('preload', 'auto');
+        
+          v.style.opacity = '0';
+          v.style.transition = 'opacity .25s ease';
+        
+          v.addEventListener('loadeddata', () => { v.style.opacity = '1'; });
+          v.addEventListener('playing', () => { v.style.opacity = '1'; });
+        
           v.addEventListener('error', () => {
             if (!safe.fallbackImageUrl) return;
             wrap.innerHTML = '';
@@ -334,14 +338,18 @@
             img.alt = titleEl.textContent || 'Výsledek kvízu';
             wrap.appendChild(img);
           });
-
+        
           wrap.appendChild(v);
+        
         } else if (safe.fallbackImageUrl) {
+          // pokud není video, můžeš ukázat obrázek
           const img = document.createElement('img');
           img.src = safe.fallbackImageUrl;
           img.alt = titleEl.textContent || 'Výsledek kvízu';
           wrap.appendChild(img);
+        
         } else {
+          // jinak jen placeholder (bude sedět na modrém pozadí wrapperu)
           const ph = document.createElement('div');
           ph.className = 'zp-quiz__result-image--placeholder';
           ph.textContent = 'Video/obrázek není nastaven';
