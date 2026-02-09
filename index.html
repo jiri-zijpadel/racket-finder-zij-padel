@@ -473,30 +473,25 @@
   })();
   </script>
   <script>
-(function () {
-  function sendHeight() {
-    const height = document.documentElement.scrollHeight;
-    window.parent.postMessage(
-      { type: 'zijpadel-iframe-height', height: height },
-      '*'
-    );
-  }
-
-  // při načtení
-  window.addEventListener('load', sendHeight);
-
-  // při změně obsahu (kroky, výsledek, obrázky)
-  const observer = new MutationObserver(sendHeight);
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true,
-    attributes: true
-  });
-
-  // fallback při resize
-  window.addEventListener('resize', sendHeight);
-})();
-</script>
-
+  (function () {
+    function sendHeight() {
+      const height = document.documentElement.scrollHeight;
+      window.parent.postMessage(
+        { type: 'zijpadel-iframe-height', height },
+        '*'
+      );
+    }
+  
+    window.addEventListener('load', sendHeight);
+    window.addEventListener('resize', sendHeight);
+  
+    const observer = new MutationObserver(sendHeight);
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: true
+    });
+  })();
+  </script>
 </body>
 </html>
